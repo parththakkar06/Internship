@@ -1,0 +1,80 @@
+<<!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      table,
+      th,
+      td {
+        border: 2px solid black;
+        padding: 5px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+      }
+
+      select {
+        width: 220px;
+        padding: 8px 10px;
+        font-size: 15px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        outline: none;
+      }
+
+      select:focus {
+        border-color: #4a90e2;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-zinc-950 text-white antialiased">
+
+    <button id="btn"
+      style="margin-top: 50px; margin-left: 100px; width: 125px; height: 50px; font-size: medium; background-color: aqua;"></button>
+
+    <p id="result"></p>
+
+    <table style="display: none; border: 5; font-family:'Courier New', Courier, monospace" id="table">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>category</th>
+          <th>price</th>
+          <th>stock</th>
+          <th>Minimum Order Quantity</th>
+          <th>Discount Percentage</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+
+      </tbody>
+    </table>
+    <br><br><br>
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Search..." />
+    </div>
+
+    <label for="category">Category</label>
+    <select id="category">
+      <option value="">Select a category</option>
+      <option value="beauty" id="beauty">Beauty</option>
+      <option value="fragrances" id="fragrances">Fragrances</option>
+      <option value="furniture" id="furniture">Furniture</option>
+      <option value="groceries" id="groceries">Groceries</option>
+    </select>
+
+
+    <script src="./FetchAPI.js" defer>
+    </script>
+  </body>
+
+  </html>git config --global user.name "parththakkar06"
+git config --global user.email "parththakkar1013@gmail.com"
