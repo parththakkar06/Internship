@@ -12,7 +12,7 @@
         <nav class="navbar">
             <div class="nav-left">Expense Tracker</div>
             <div class="nav-right">
-                <a href="index.html" class="active">Home</a>
+                <a href="index.html" class="active">Add Expense</a>
                 <a href="Transactions.html">Transactions</a>
             </div>
         </nav>
@@ -22,19 +22,27 @@
         <input type="text" id="title"><br>
         <label>Amount*</label>
         <input type="number" id="amt"><br>
-        <label for="currency">Currency : 
-            
-        </label>
-        <input type="text" id="currency">
+      <label for="currency">Currency* : </label>
+        <select id="currency">
+            <option selected value="none">----Select ONE-----</option>
+            <option value="INR">INR</option>
+            <option value="Dollar">Dollar</option>
+            <option value="CanadianDollar">Canadian Dollar</option>
+            <option value="Pound">Pound</option>
+            <option value="Yen">Yen</option>
+        </select>
+        <br>
         <br>
         <label>Type*</label>
         <select id="choose">
+            <option selected value="none">----Select ONE-----</option>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
         </select>
         <br>
         <label for="category">Category* : </label>
         <select id="category">
+            <option selected value="none">----Select ONE-----</option>
             <option value="food">Food</option>
             <option value="petrol">Petrol</option>
             <option value="shopping">Shopping</option>

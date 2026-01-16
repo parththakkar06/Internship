@@ -50,8 +50,8 @@ function saveTransactions(transactions) {
     const evenTransactions = []
     const oddTransactions = []
 
-    transactions.forEach((t,index)=>{
-        if(index % 2 == 0){
+    transactions.forEach((t)=>{
+        if(t.id % 2 == 0){
             evenTransactions.push(t)
         }else{
             oddTransactions.push(t)
@@ -65,18 +65,3 @@ function saveTransactions(transactions) {
 
 }
 
-
-function deleteTransactionByIndex(index){
-    index = Number(index)
-    if(index % 2 ==0){
-        const even = JSON.parse(localStorage.getItem("evenTransactions")) || [];
-        const evenIndex = Math.floor(index / 2)
-        even.splice(evenIndex , 1)
-        localStorage.setItem("evenTransactions",JSON.stringify(even))
-    }else{
-        const odd = JSON.parse(getCookie("oddTransactions")) || "[]"
-        const oddIndex = Math.floor(index / 2)
-        odd.splice(oddIndex , 1)
-        setCookie("oddTransactions",JSON.stringify(odd))
-    }
-}
