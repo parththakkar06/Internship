@@ -2,20 +2,22 @@
     <head>
         <title>Expense Tracker</title>
         <style>
-            body{
-                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
-                padding: 20px;
-            }
-            input, button ,select{
-                margin: 5px;
-            }
+            
 
         </style>
         <link rel="stylesheet" href="style.css">
 
     </head>
     <body>
-        <h2>Expense Tracker</h2>
+        <nav class="navbar">
+            <div class="nav-left">Expense Tracker</div>
+            <div class="nav-right">
+                <a href="index.html" class="active">Home</a>
+                <a href="Transactions.html">Transactions</a>
+            </div>
+        </nav>
+        <div class="mid">
+        <!-- <h2>Expense Tracker</h2> -->
         <label>Title*</label>
         <input type="text" id="title"><br>
         <label>Amount*</label>
@@ -43,14 +45,16 @@
         <label for="description">Description : </label>
         <textarea id="description"></textarea>
         <br><br>
-        <button id="btn">Add</button>
+        <button id="btn" class="btn">Add</button>
         <h3>Summary</h3>
         <p>Total Income : <span id="totalIncome"></span></p>
         <p>Total Expense : <span id="totalExpense"></span></p>
         <p>Balance : <span id="balance"></span></p>
-        <h3>Transactions</h3>
-        <br>
-        <ul id="list"></ul>
+        
+        </div>
+        <script src="store.js"></script>
         <script src="ExpenseTracker.js"></script>
+        
+
     </body>
 </html>

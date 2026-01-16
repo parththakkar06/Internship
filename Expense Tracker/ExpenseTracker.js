@@ -18,27 +18,6 @@
 // Event Handling & Event Delegation – For better performance.
 // CRUD Operations – Create, Read, Update, and Delete transactions.
 
-function setCookie(name,value, days = 365){
-    const expires = new Date(Date.now() + days *864e5).toUTCString()
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
 
 //----------------------------------------------------------------------------
 
@@ -53,11 +32,12 @@ const list = document.getElementById("list")
 const descriptionInput = document.getElementById("description")
 const categoryInput = document.getElementById("category")
 const currencyInput = document.getElementById("currency")
-let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-let editIndex = null
+let transactions = loadTransactions()
+let editIndex = localStorage.getItem("editIndex")
 
 
 //-----------------------------------------------------------------------------
+
 
 function addTransaction() {
     const title = titleInput.value
@@ -67,7 +47,7 @@ function addTransaction() {
     const category = categoryInput.value
     const date = new Date().toLocaleDateString()
     const currency = currencyInput.value || "INR"
-
+    
 
     if (!title || amount <= 0 ){
         alert("Fill all the required fields correctly!")
@@ -76,56 +56,16 @@ function addTransaction() {
 
     transactions.push({ title, amount, type, description, category, date, currency })
 
-    saveData()
-    showTransactions()
+    saveTransactions(transactions)
+    transactions = loadTransactions()
+
     updateSummary()
-
+    localStorage.removeItem("editIndex")
     clearAll()
+    editIndex = null
 }
 
 
-function saveData() {
-    localStorage.setItem("transactions", JSON.stringify(transactions));
-    console.log(transactions)
-}
-
-
-function showTransactions() {
-    list.innerHTML = ""
-
-    transactions.map((transaction, index) => {
-        const li = document.createElement("li")
-        li.className = transaction.type
-        li.innerHTML = `
-            <div class="txn-main">
-                <span class="txn-title">${transaction.title}</span>
-                <span class="txn-amount">
-                    ${transaction.amount} ${transaction.currency}
-                </span>
-            </div>
-
-            <div class="txn-meta">
-                <span>${transaction.category}</span>
-                <span>${transaction.type}</span>
-            </div>
-
-            ${transaction.description ? `
-            <div class="txn-desc">
-                ${transaction.description}
-            </div>
-            ` : ""}
-
-            <div class="txn-actions">
-                <button data-index="${index}" data-action="edit">Edit</button>
-                <button data-index="${index}" data-action="delete" class="danger">
-                    Delete
-                </button>
-            </div>
-        `;
-
-        list.appendChild(li)
-    })
-}
 
 function updateSummary() {
     const income = transactions.filter(t => t.type === 'income')
@@ -154,12 +94,14 @@ function updateTransaction() {
     transactions[editIndex].category = categoryInput.value
     transactions[editIndex].date = new Date().toLocaleDateString()
 
-    saveData()
-    showTransactions()
+    saveTransactions(transactions)
+    transactions = loadTransactions()
     updateSummary()
 
+    localStorage.removeItem("editIndex")
     btn.textContent = "Add"
     editIndex = null;
+    clearAll()
 }
 
 
@@ -170,40 +112,28 @@ function clearAll() {
     currencyInput.value = ""
 }
 
+function checkEditMode(){
+    if(editIndex === null)
+        return
+
+    editIndex = Number(editIndex)
+    const t = transactions[editIndex]
+
+    if(!t)
+        return
+
+    titleInput.value = t.title
+    amountInput.value = t.amount
+    typeInput.value = t.type
+    descriptionInput.value = t.description
+    categoryInput.value = t.category
+
+    btn.textContent = "Update"
+}
+
 
 // EVENT LISTENERS
 
-list.addEventListener("click", (e) => {
-    if (e.target.tagName !== "BUTTON") {
-        return
-    }
-
-    const action = e.target.dataset.action
-    const index = e.target.dataset.index
-
-    if (action === "delete")
-        transactions.splice(index, 1);
-
-    if (action === "edit") {
-        const t = transactions[index]
-
-        titleInput.value = t.title
-        amountInput.value = t.amount
-        currencyInput.value = t.currency
-        typeInput.value = t.type
-        categoryInput.value = t.category
-        descriptionInput.value = t.description
-
-        editIndex = index
-        btn.textContent = "Update"
-        return
-    }
-
-    saveData()
-    showTransactions()
-    updateSummary()
-
-})
 
 btn.addEventListener("click", () => {
     if (editIndex === null) {
@@ -214,5 +144,5 @@ btn.addEventListener("click", () => {
     }
 })
 
-showTransactions();
 updateSummary()
+checkEditMode()
