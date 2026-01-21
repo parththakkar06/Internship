@@ -25,6 +25,16 @@
                     <option value="others">Others</option>
                 </select>
             </div>
+            <div class="filter-bar">
+                <label for="typeFilter">Filter by Type : </label>
+                <select id="typeFilter">
+                    <option value="all">All</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+            </div>
+            <div id="noItems" style="text-align: center;"><h2></h2></div>
+            <div id="table">
             <table class="transaction-table">
                 <thead>
                     <tr>
@@ -41,6 +51,7 @@
 
                 </tbody>
             </table>
+            </div>
         </div>
         <script src="store.js"></script>
         <script src="Transactions.js"></script>

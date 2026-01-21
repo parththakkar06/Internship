@@ -21,177 +21,179 @@
 
 //----------------------------------------------------------------------------
 
-const titleInput = document.getElementById("title")
-const amountInput = document.getElementById("amt")
-const typeInput = document.getElementById("choose")
-const totalIncome = document.getElementById("totalIncome")
-const totalExpense = document.getElementById("totalExpense")
-const balance = document.getElementById("balance")
-const btn = document.getElementById("btn")
-const list = document.getElementById("list")
-const descriptionInput = document.getElementById("description")
-const categoryInput = document.getElementById("category")
-const currencyInput = document.getElementById("currency")
-let transactions = loadTransactions()
-let editId = localStorage.getItem("editId")
-let id = localStorage.getItem("Id")
+const titleInput = document.getElementById("title");
+const amountInput = document.getElementById("amt");
+const typeInput = document.getElementById("choose");
+const totalIncome = document.getElementById("totalIncome");
+const totalExpense = document.getElementById("totalExpense");
+const balance = document.getElementById("balance");
+const btn = document.getElementById("btn");
+const list = document.getElementById("list");
+const descriptionInput = document.getElementById("description");
+const categoryInput = document.getElementById("category");
+const currencyInput = document.getElementById("currency");
+let transactions = loadTransactions();
+let editId = localStorage.getItem("editId");
+let id = localStorage.getItem("Id");
 
 //-----------------------------------------------------------------------------
 
 
-function addTransaction() {
-    const title = titleInput.value
-    const amount = Number(amountInput.value)
-    const type = typeInput.value
-    const description = descriptionInput.value
-    const category = categoryInput.value
-    const date = new Date().toLocaleDateString()
-    let currency = currencyInput.value
+addTransaction = ()=>{
+    
+    const title = titleInput.value;
+    const amount = Number(amountInput.value);
+    const type = typeInput.value;
+    const description = descriptionInput.value;
+    const category = categoryInput.value;
+    const date = new Date().toLocaleDateString();
+    let currency = currencyInput.value;
 
     if (!title || amount <= 0 || category === "none" || type === "none") {
-        alert("Fill all the required fields correctly!")
-        return
+        alert("Fill all the required fields correctly!");
+        return;
     }
     if (currency === "none") {
-        currency = "INR"
+        currency = "INR";
     }
 
 
-    transactions.push({ title, amount, type, description, category, date, currency , id})
-    saveTransactions(transactions)
-    transactions = loadTransactions()
+    transactions.push({ title, amount, type, description, category, date, currency , id});
+    saveTransactions(transactions);
+    transactions = loadTransactions();
 
-    updateSummary()
-    localStorage.removeItem("editIndex")
-    editIndex = null
+    updateSummary();
+    localStorage.removeItem("editIndex");
+    editIndex = null;
 
-    window.location.href = "./index.html"
-}
+    window.location.href = "./index.html";
+
+};
 
 
 
-function updateSummary() {
+updateSummary = () => {
     const income = transactions.filter(t => t.type === 'income')
-        .reduce((sum, t) => sum + Number(t.amount), 0)
+        .reduce((sum, t) => sum + Number(t.amount), 0);
     const expense = transactions.filter(t => t.type === 'expense')
-        .reduce((sum, t) => sum + Number(t.amount), 0)
+        .reduce((sum, t) => sum + Number(t.amount), 0);
 
     const convertIncomeDollar = transactions.filter(t => t.currency === 'Dollar' && t.type === 'income')
-        .reduce((sum, t) => sum + Number(t.amount) * 91, 0)
+        .reduce((sum, t) => sum + Number(t.amount) * 91, 0);
     const convertExpenseDollar = transactions.filter(t => t.currency === 'Dollar' && t.type === 'expense')
-        .reduce((sum, t) => sum + Number(t.amount) * 91, 0)
+        .reduce((sum, t) => sum + Number(t.amount) * 91, 0);
 
     const convertIncomeCanadianDollar = transactions.filter(t => t.currency === 'CanadianDollar' && t.type === 'income')
-        .reduce((sum, t) => sum + Number(t.amount) * 65, 0)
+        .reduce((sum, t) => sum + Number(t.amount) * 65, 0);
     const convertExpenseCanadianDollar = transactions.filter(t => t.currency === 'CanadianDollar' && t.type === 'expense')
-        .reduce((sum, t) => sum + Number(t.amount) * 65, 0)
+        .reduce((sum, t) => sum + Number(t.amount) * 65, 0);
 
 
     const convertIncomeYen = transactions.filter(t => t.currency === 'Yen' && t.type === 'income')
-        .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0)
+        .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0);
     const convertExpenseYen = transactions.filter(t => t.currency === 'Yen' && t.type === 'expense')
-        .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0)
+        .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0);
 
     const convertIncomePound = transactions.filter(t => t.currency === 'Pound' && t.type === 'income')
-        .reduce((sum, t) => sum + Number(t.amount) * 121, 0)
+        .reduce((sum, t) => sum + Number(t.amount) * 121, 0);
     const convertExpensePound = transactions.filter(t => t.currency === 'Pound' && t.type === 'expense')
-        .reduce((sum, t) => sum + Number(t.amount) * 121, 0)
+        .reduce((sum, t) => sum + Number(t.amount) * 121, 0);
 
-    const ConvertedIncome = convertIncomeCanadianDollar + convertIncomeDollar + convertIncomePound + convertIncomeYen + income
-    const ConvertedExpense = convertExpenseCanadianDollar + convertExpenseDollar + convertExpensePound + convertExpenseYen + expense
+    const ConvertedIncome = convertIncomeCanadianDollar + convertIncomeDollar + convertIncomePound + convertIncomeYen + income;
+    const ConvertedExpense = convertExpenseCanadianDollar + convertExpenseDollar + convertExpensePound + convertExpenseYen + expense;
 
     totalIncome.textContent = ConvertedIncome;
     totalExpense.textContent = ConvertedExpense;
-    balance.textContent = (ConvertedIncome - ConvertedExpense)
-}
+    balance.textContent = (ConvertedIncome - ConvertedExpense);
+};
 
 
-function updateTransaction() {
+updateTransaction = () => {
     if (editId === null) return
 
     const t = transactions.map((c) => {
         if (editId == c.id) {
-            c.title = titleInput.value
-            c.amount = Number(amountInput.value)
-            c.currency = currencyInput.value || 'INR'
-            c.type = typeInput.value
-            c.description = descriptionInput.value
-            c.category = categoryInput.value
-            c.date = new Date().toLocaleDateString()
+            c.title = titleInput.value;
+            c.amount = Number(amountInput.value);
+            c.currency = currencyInput.value || 'INR';
+            c.type = typeInput.value;
+            c.description = descriptionInput.value;
+            c.category = categoryInput.value;
+            c.date = new Date().toLocaleDateString();
         }
-    })
+    });
 
-        saveTransactions(transactions)
-        transactions = loadTransactions()
-        updateSummary()
+        saveTransactions(transactions);
+        transactions = loadTransactions();
+        updateSummary();
 
-        localStorage.removeItem("editId")
-        btn.textContent = "Add"
+        localStorage.removeItem("editId");
+        btn.textContent = "Add";
         editId = null;
 
-        window.location.href = "./Transactions.html"
+        window.location.href = "./Transactions.html";
 
-    }
+    };
 
 
-function checkEditMode() {
+checkEditMode = () => {
             if (editId === null)
-                return
+                return;
 
-            console.log(editId)
+            console.log(editId);
             // editId = Number(editIndex)
             const t = transactions.map((c) => {
                 if (editId === c.id) {
-                    titleInput.value = c.title
-                    amountInput.value = c.amount
-                    typeInput.value = c.type
-                    descriptionInput.value = c.description
-                    categoryInput.value = c.category
-                    currencyInput.value = c.currency
+                    titleInput.value = c.title;
+                    amountInput.value = c.amount;
+                    typeInput.value = c.type;
+                    descriptionInput.value = c.description;
+                    categoryInput.value = c.category;
+                    currencyInput.value = c.currency;
 
-                    btn.textContent = "Update"
+                    btn.textContent = "Update";
 
                 }
-            })
+            });
 
 
             if (!t)
-                return
+                return;
 
-        }
+        };
 
 
-function idCheck() {
+idCheck = () => {
 
             try {
                 if (localStorage.getItem("Id")) {
-                    let id = localStorage.getItem("Id")
+                    let id = localStorage.getItem("Id");
                     // console.log(id)
                     id++;
-                    localStorage.setItem("Id", Number(id))
+                    localStorage.setItem("Id", Number(id));
                 } else {
-                    localStorage.setItem("Id", 1)
+                    localStorage.setItem("Id", 1);
                     // idCheck()
                 }
             } catch (err) {
-                console.log(err.message)
+                console.log(err.message);
             }
-        }
+        };
 
 // EVENT LISTENERS
 
 
 btn.addEventListener("click", () => {
             if (editId === null) {
-                addTransaction()
-                idCheck()
+                addTransaction();
+                idCheck();
             } else {
-                updateTransaction()
+                updateTransaction();
             }
         })
 
-updateSummary()
-checkEditMode()
+updateSummary();
+checkEditMode();
 
 
 

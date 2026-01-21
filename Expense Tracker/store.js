@@ -1,9 +1,9 @@
-function setCookie(name,value, days = 365){
-    const expires = new Date(Date.now() + days *864e5).toUTCString()
+setCookie = (name,value, days = 365) => {
+    const expires = new Date(Date.now() + days *864e5).toUTCString();
     document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
+};
 
-function getCookie(cname) {
+getCookie = (cname) => {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
   let ca = decodedCookie.split(';');
@@ -17,51 +17,51 @@ function getCookie(cname) {
     }
   }
   return "";
-}
+};
 
-function deleteCookie(name){
-    document.cookie = `${name}=; expires= Thu, 01 Jan 1970 00:00:00 UTC; path=/`
-}
-
-
+deleteCookie = (name) => {
+    document.cookie = `${name}=; expires= Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+};
 
 
-function loadTransactions(){
-    const even = JSON.parse(localStorage.getItem("evenTransactions")) || []
-    const odd = JSON.parse(getCookie("oddTransactions")) || []
 
-    const merged = []
-    const maxLength = Math.max(even.length,odd.length)
+
+loadTransactions = () => {
+    const even = JSON.parse(localStorage.getItem("evenTransactions")) || [];
+    const odd = JSON.parse(getCookie("oddTransactions")) || [];
+
+    const merged = [];
+    const maxLength = Math.max(even.length,odd.length);
 
     for(let i = 0 ; i < maxLength; i++){
         if(even[i])
-            merged.push(even[i])
+            merged.push(even[i]);
 
         if(odd[i])
-            merged.push(odd[i])
+            merged.push(odd[i]);
     }
 
-    return merged
-}
+    return merged;
+};
 
 
 
-function saveTransactions(transactions) {
-    const evenTransactions = []
-    const oddTransactions = []
+saveTransactions = (transactions) => {
+    const evenTransactions = [];
+    const oddTransactions = [];
 
     transactions.forEach((t)=>{
         if(t.id % 2 == 0){
-            evenTransactions.push(t)
+            evenTransactions.push(t);
         }else{
-            oddTransactions.push(t)
+            oddTransactions.push(t);
         }
     })
 
     localStorage.setItem("evenTransactions", JSON.stringify(evenTransactions));
-    setCookie("oddTransactions",JSON.stringify(oddTransactions))
-    console.log("Even --> Local storage...",evenTransactions)
-    console.log("Odd --> Cookies",oddTransactions)
+    setCookie("oddTransactions",JSON.stringify(oddTransactions));
+    console.log("Even --> Local storage...",evenTransactions);
+    console.log("Odd --> Cookies",oddTransactions);
 
-}
+};
 
