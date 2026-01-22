@@ -14,4 +14,3 @@ console.log("Fifth")
 // process.nextTick runs before the microtasks run (Promises) , i.e , Fourth
 // Promise will run before the macrotasks run (settimeout) , i.e , Third
 // MacroTasks always runs the last (Timer phase)
-
