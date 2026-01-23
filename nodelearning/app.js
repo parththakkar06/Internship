@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 
+
+const userModel = require("./models/UserModel");
 
 app.get("/test",(req,res)=>{
     console.log("test api called....")
@@ -111,8 +114,26 @@ app.get("/languages",(req,res)=>{
 })
 
 
+app.get("/usersfromdb",async(req,res)=>{
+    const users = await userModel.find()
+    console.log(users)
+    res.json({
+        message : "Users Fetched from db",
+        data : users
+    });
+})
+
+
+
+mongoose.connect("mongodb+srv://root:root@cluster0.9ydkd31.mongodb.net/mern_royal").then(()=>{
+    console.log("database connected successfully !!")
+})
+
+
+
+
 //server creation 
-const PORT = 3000;
+const PORT = 3002;
 app.listen(PORT,()=>{
     console.log(`Server started on PORT ... ${PORT}`)
 })
