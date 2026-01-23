@@ -125,7 +125,7 @@ app.get("/usersfromdb",async(req,res)=>{
 
 
 
-mongoose.connect("mongodb+srv://root:root@cluster0.9ydkd31.mongodb.net/mern_royal").then(()=>{
+mongoose.connect("").then(()=>{
     console.log("database connected successfully !!")
 })
 
