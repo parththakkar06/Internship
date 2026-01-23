@@ -1,18 +1,16 @@
 import express from "express";
 import config from "./config/serverconfig.js"
+import healthRoutes from "./routes/healthRoutes.js";
 
 const app = express();
 
 //global middleware
 app.use(express.json());
 
+app.use("/",healthRoutes)
+
 console.log("sssssss")
 
-
-
-app.listen(config.port, ()=>{
-    console.log(`Server Running on port ${config.port} in ${config.env} mode`);
-});
 
 
 export default app;
