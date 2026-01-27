@@ -61,9 +61,26 @@ const deleteUserById = async (req,res) => {
 }
 
 
+const updateUser = async(req,res) => {
+    try{
+        const updatedUser = await userModel.findByIdAndUpdate(req.params.id,req.body,{new:true})
+        res.status(200).json({
+            message : "User Updated Successfully..",
+            data : updatedUser
+        })
+    }catch(err){
+        res.status(500).json({
+            message : "Error while Updating User",
+            error : err
+        })
+    }
+}
+
+
 module.exports = {
     getAllUsers,
     getUserById,
     addUser,
-    deleteUserById
+    deleteUserById,
+    updateUser
 }
