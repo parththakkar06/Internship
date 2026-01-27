@@ -123,15 +123,16 @@ const mongoose = require("mongoose");
 //     });
 // })
 
+app.use(express.json())
+
 
 const userRoutes = require("./routes/UserRoutes")
-
 app.use("/user",userRoutes)
 
 
 
 
-mongoose.connect("mongodb+srv://root:root@cluster0.9ydkd31.mongodb.net/mern_royal").then(()=>{
+mongoose.connect("mongodb+srv://root:root@cluster0.9ydkd31.mongodb.net/Node_Practice").then(()=>{
     console.log("database connected successfully !!")
 })
 
