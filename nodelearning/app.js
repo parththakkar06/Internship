@@ -140,7 +140,7 @@ mongoose.connect("mongodb+srv://root:root@cluster0.9ydkd31.mongodb.net/Node_Prac
 
 
 //server creation 
-const PORT = 3000;
+const PORT = 3002;
 app.listen(PORT,()=>{
     console.log(`Server started on PORT ... ${PORT}`)
 })

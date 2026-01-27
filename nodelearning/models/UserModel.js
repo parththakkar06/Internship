@@ -13,9 +13,18 @@ const userSchema = new Schema({
     status: {
         type : Boolean,
         required : true
+    },
+    hobbies:[{
+        type : String
+    }],
+    bloodGroup:{
+        enum:["A+","A-","AB+","AB-","B+","B-","O+","O+"],
+        type: String
     }
    
     //fields
+},{
+    timestamps : true
 })
 
 module.exports = mongoose.model("users",userSchema)
