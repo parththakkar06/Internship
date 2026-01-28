@@ -1,3 +1,4 @@
+const md5 = require("md5")
 if (typeof localStorage === "undefined" || localStorage === null) {
     var LocalStorage = require('node-localstorage').LocalStorage;
     localStorage = new LocalStorage('./scratch');
@@ -32,10 +33,12 @@ const getUserById = (req, res) => {
     const id = req.params.id
     const foundUser = data.filter(u => u.id == id)
     console.log(foundUser)
+    const hash = md5(foundUser)
     if(foundUser.length > 0){
         res.json({
             message : "User Found!",
-            data : foundUser
+            data : foundUser,
+            hasheddata : hash
         })
     }else{
         res.json({
