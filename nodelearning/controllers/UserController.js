@@ -77,10 +77,29 @@ const updateUser = async(req,res) => {
 }
 
 
+const addHobby = async(req,res) => {
+    try{
+        const id = req.params.id
+        const updatedUser = await userModel.findByIdAndUpdate(id,{$push:{hobbies:req.body.hobby}},{new:true})
+
+        res.status(200).json({
+            message : `User's hobby updated on id - ${id}`,
+            data : updatedUser
+        })
+    }catch(err){
+        res.status(500).json({
+            message : "Error Detected!",
+            error : err
+        })
+    }
+}
+
+
 module.exports = {
     getAllUsers,
     getUserById,
     addUser,
     deleteUserById,
-    updateUser
+    updateUser,
+    addHobby
 }
