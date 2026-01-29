@@ -1,4 +1,5 @@
 const md5 = require("md5")
+const bcrypt = require("bcrypt")
 if (typeof localStorage === "undefined" || localStorage === null) {
     var LocalStorage = require('node-localstorage').LocalStorage;
     localStorage = new LocalStorage('./scratch');
@@ -21,6 +22,8 @@ const getAllUsers = (req, res) => {
 
 const addUsers = (req, res) => {
     const data = getData()
+    const hashedPassword = bcrypt.hashSync(req.body.password,10)
+    req.body.password = hashedPassword
     const newUser = req.body
     data.push(newUser)
     localStorage.setItem("data", JSON.stringify(data))
@@ -77,10 +80,36 @@ const updateUser = (req,res) => {
     }
 }
 
+
+const loginUser = (req,res) => {
+    const data = getData()
+    const {email , password} = req.body
+    console.log(password)
+    const userByEmail = data.filter(u => u.email === email)
+    console.log(userByEmail)
+    if(userByEmail.length > 0) {
+        if(bcrypt.compareSync(password,userByEmail[0].password)){
+            res.json({
+                message : "User Logged In Successfully!",
+                data : userByEmail
+            })
+        }else{
+            res.json({
+                message : "Invalid Credentials!"
+            })
+        }
+    }else{
+        res.json({
+            message : "User Not Found!"
+        })
+    }
+}
+
 module.exports = {
     getAllUsers,
     addUsers,
     getUserById,
     deleteUserById,
-    updateUser
+    updateUser,
+    loginUser
 }
