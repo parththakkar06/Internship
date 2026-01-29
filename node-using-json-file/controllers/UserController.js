@@ -1,5 +1,8 @@
 const md5 = require("md5")
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const secret = "parth"
+
 if (typeof localStorage === "undefined" || localStorage === null) {
     var LocalStorage = require('node-localstorage').LocalStorage;
     localStorage = new LocalStorage('./scratch');
@@ -25,9 +28,13 @@ const addUsers = (req, res) => {
     const hashedPassword = bcrypt.hashSync(req.body.password,10)
     req.body.password = hashedPassword
     const newUser = req.body
+    const token = jwt.sign(newUser,secret)
     data.push(newUser)
     localStorage.setItem("data", JSON.stringify(data))
-    res.json(newUser)
+    res.json({
+        data :newUser,
+        token : token
+    })
 }
 
 
@@ -105,11 +112,34 @@ const loginUser = (req,res) => {
     }
 }
 
+
+
+const getUserByToken = (req,res) => {
+    const token = req.body.token
+    const data = getData()
+    try{
+        const userFromToken = jwt.verify(token,secret)
+        console.log(userFromToken)
+        const user = data.find(u=>u.id == userFromToken.id)
+        res.json({
+            message : "Valid User !",
+            data : user,
+            userfromtoken : userFromToken
+        })
+    }catch(err){
+        res.json({
+            message : "Token not valid!",
+            error : err
+        })
+    }
+}
+
 module.exports = {
     getAllUsers,
     addUsers,
     getUserById,
     deleteUserById,
     updateUser,
-    loginUser
+    loginUser,
+    getUserByToken
 }
