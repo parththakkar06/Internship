@@ -9,7 +9,8 @@ routes.post("/users",userController.addUsers)
 routes.get("/users/:id",userController.getUserById)
 routes.delete("/users/:id",userController.deleteUserById)
 routes.put("/users/:id",userController.updateUser)
-routes.get("/login",userController.loginUser)
+routes.get("/login",authMiddleware.authenticate,userController.loginUser)
 routes.get("/token",userController.getUserByToken)
+routes.post("/refresh",userController.refreshUserToken)
 
 module.exports = routes
