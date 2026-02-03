@@ -2,6 +2,7 @@ const md5 = require("md5")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const secret = "parth"
+const secret2 = "thakkar"
 
 if (typeof localStorage === "undefined" || localStorage === null) {
     var LocalStorage = require('node-localstorage').LocalStorage;
@@ -88,34 +89,47 @@ const updateUser = (req, res) => {
 }
 
 
-const loginUser = (req, res) => {
-    const data = getData()
-    const { email, password } = req.body
-    console.log(password)
-    const user = data.filter(u => u.email === email)
-    console.log(user)
-    if (user.length > 0) {
-        if (bcrypt.compareSync(password, user[0].password)) {
-            const accessToken = jwt.sign({ user }, secret, { expiresIn: "1h" })
-            const refreshToken = jwt.sign({ user }, secret, { expiresIn: "1d" })
-            res
-                .cookie('refreshToken', refreshToken, { httpOnly: true })
-                .header("Authorization", accessToken)
-                .json({
-                    message: "User Logged In Successfully!",
-                    data: user
-                })
-        } else {
-            res.json({
-                message: "Invalid Credentials!"
-            })
-        }
-    } else {
-        res.json({
-            message: "User Not Found!"
-        })
+const loginUser = async (req, res) => {
+    const data = getData();
+    const { email, password } = req.body;
+
+    const user = data.find(u => u.email === email);
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
     }
-}
+
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) {
+        return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const accessToken = jwt.sign(
+        { id: user.id, email: user.email },
+        secret,
+        { expiresIn: "15m" }
+    );
+
+    const refreshToken = jwt.sign(
+        { id: user.id, email: user.email },
+        secret2,
+        { expiresIn: "7d" }
+    );
+
+    res
+        .cookie("accessToken", accessToken, {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: false,
+            maxAge: 15 * 60 * 1000
+        })
+        .cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: false,
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        })
+        .json({ message: "Login successful" });
+};
 
 
 const refreshUserToken = (req, res) => {
@@ -128,8 +142,8 @@ const refreshUserToken = (req, res) => {
         const decoded = jwt.verify(refreshToken, secret);
         const accessToken = jwt.sign({ user: decoded.user }, secret, { expiresIn: '1h' });
         res
-        .header('Authorization', accessToken)
-        .send(decoded.user);
+            .header('Authorization', accessToken)
+            .send(decoded.user);
     } catch (error) {
         return res.status(400).send('Invalid refresh token.');
     }
