@@ -109,28 +109,34 @@ const loginUser = async (req, res) => {
         { expiresIn: "15m" }
     );
 
-    const refreshToken = jwt.sign(
-        { id: user.id, email: user.email },
-        secret2,
-        { expiresIn: "7d" }
-    );
+    // const refreshToken = jwt.sign(
+    //     { id: user.id, email: user.email },
+    //     secret2,
+    //     { expiresIn: "7d" }
+    // );
 
-    res
-        .cookie("accessToken", accessToken, {
-            httpOnly: true,
-            sameSite: "lax",
-            secure: false,
-            maxAge: 15 * 60 * 1000
-        })
-        .cookie("refreshToken", refreshToken, {
-            httpOnly: true,
-            sameSite: "lax",
-            secure: false,
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        })
-        .json({ message: "Login successful" });
+    res.json({ message: "Login successful" });
+    // .cookie("accessToken", accessToken, {
+    //     httpOnly: true,
+    //     sameSite: "lax",
+    //     secure: false,
+    //     maxAge: 15 * 60 * 1000
+    // })
+    // .cookie("refreshToken", refreshToken, {
+    //     httpOnly: true,
+    //     sameSite: "lax",
+    //     secure: false,
+    //     maxAge: 7 * 24 * 60 * 60 * 1000
+    // })
 };
 
+
+const userProfile = (req, res) => {
+    res.json({
+        message: "Protected User",
+        data: req.user
+    })
+}
 
 const refreshUserToken = (req, res) => {
     const refreshToken = req.cookies['refreshToken'];
@@ -179,5 +185,6 @@ module.exports = {
     updateUser,
     loginUser,
     getUserByToken,
-    refreshUserToken
+    refreshUserToken,
+    userProfile
 }
