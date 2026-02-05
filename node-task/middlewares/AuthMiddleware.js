@@ -2,14 +2,12 @@ const secret = "Innovate"
 const jwt = require("jsonwebtoken")
 
 const verifyUser = (req,res,next) => {
-    const token = req.headers.authorization
+    const token = req.cookies?.token
+    // const token = req.headers.authorization
     console.log(token)
 
     if(token){
-        if(token.startsWith("Bearer ")){
-            const token2 = token.split(" ")[1]
-
-            const user = jwt.verify(token2,secret)
+            const user = jwt.verify(token,secret)
             req.user = user
             next()
         }else{
@@ -17,11 +15,7 @@ const verifyUser = (req,res,next) => {
                 message : "Invalid Token"
             })
         }
-    }else{
-        res.json({
-            message : "Not a Bearer Token"
-        })
-    }
+    
     next()
 }
 

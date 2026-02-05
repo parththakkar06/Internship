@@ -73,15 +73,26 @@ const loginUser = (req, res) => {
     const token = jwt.sign(
         { id: user.id, email: user.email },
         secret,
-        {expiresIn : "2m" }
+        { expiresIn: "2m" }
     )
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "None",
+        maxAge: 15 * 60 * 1000
+    })
 
     res.json({
-        message : `Welcome ${user.name}`,
-        token : `you have a token. ${token}`,
+        message: `Welcome ${user.name}`,
+        token: `you have a token. ${token}`,
     })
 }
-
+// .cookie("accessToken", accessToken, {
+//     httpOnly: true,
+//     sameSite: "lax",
+//     secure: false,
+//     maxAge: 15 * 60 * 1000
+// })
 
 const updateUser = (req, res) => {
     const data = getData()
