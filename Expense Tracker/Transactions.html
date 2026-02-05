@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Transactions</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="nav-left">Expense Tracker</div>
+            <div class="nav-right">
+                <a href="index.html">Add Expense</a>
+                <a href="Transactions.html" class="active">Transactions</a>
+            </div> 
+        </nav>
+        <div class="mid">
+            
+            <h2 class="page-title">All Transactions</h2>
+            <div class="filter-bar">
+                <label for="categoryfilter">Filter by category : </label>
+                <select id="categoryfilter">
+                    <option value="all">All</option>
+                    <option value="food">Food</option>
+                    <option value="petrol">Petrol</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="bills">Bills</option>
+                    <option value="others">Others</option>
+                </select>
+            </div>
+            <div class="filter-bar">
+                <label for="typeFilter">Filter by Type : </label>
+                <select id="typeFilter">
+                    <option value="all">All</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+            </div>
+            <div id="noItems" style="text-align: center;"><h2></h2></div>
+            <div id="table">
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionsBody">
+
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <script src="store.js"></script>
+        <script src="Transactions.js"></script>
+        
+    </body>
+</html>
