@@ -20,7 +20,7 @@ app.get("/read-csv", (req, res) => {
     let dataFromCSV = []
 
     const options = { headers: true, trim: true }
-    fs.createReadStream(path.resolve(__dirname, "User_Data.csv"))
+    fs.createReadStream(path.resolve("User_Data.csv"))
         .pipe(csv.parse(options))
         .on('error', err => console.log(err))
         .on('data', row => dataFromCSV.push(row))
