@@ -131,7 +131,7 @@ app.get("/process-csv", (req, res) => {
 
 
             // csv writer 
-            console.log("Data from read ...... ",dataFromCSV)
+            // console.log("Data from read ...... ",dataFromCSV)
             const csvWriter = createCsvWriter({
                 path: "processed_users.csv",
                 header: [
