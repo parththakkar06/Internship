@@ -1,6 +1,6 @@
 const { json } = require("express");
 const jwt = require("jsonwebtoken")
-const secret = "innovate"
+const secret = "Innovate"
 
 if (typeof localStorage === "undefined" || localStorage === null) {
     var LocalStorage = require("node-localstorage").LocalStorage;
@@ -48,12 +48,40 @@ const addUsers = (req, res) => {
     console.log(data)
     localStorage.setItem("data", JSON.stringify(data))
     localStorage.setItem("id", id)
-    const token = jwt.sign(newUser,secret)
     res.json({
         message: "New User Created Successfully!",
-        token : token
+        token: token
     })
 }
+
+
+const loginUser = (req, res) => {
+    const data = getData()
+    const { email, password } = req.body
+    const user = data.find(u => u.email === email)
+    if (!user) {
+        return res.json({
+            message: "No User Found With That Email!"
+        })
+    }
+    if (user.password !== password) {
+        return res.json({
+            message: "Pasword Does Not Match!"
+        })
+    }
+
+    const token = jwt.sign(
+        { id: user.id, email: user.email },
+        secret,
+        {expiresIn : "2m" }
+    )
+
+    res.json({
+        message : `Welcome ${user.name}`,
+        token : `you have a token. ${token}`,
+    })
+}
+
 
 const updateUser = (req, res) => {
     const data = getData()
@@ -61,11 +89,11 @@ const updateUser = (req, res) => {
     const index = data.findIndex(u => u.id == id)
     if (index !== -1) {
         data[index] = {
-            id : id,
-            name : req.body.name || data[index].name,
-            age : req.body.age || data[index].age,
-            email : data[index].email,
-            password : data[index].password
+            id: id,
+            name: req.body.name || data[index].name,
+            age: req.body.age || data[index].age,
+            email: data[index].email,
+            password: data[index].password
         };
         localStorage.setItem("data", JSON.stringify(data))
         res.json({
@@ -76,24 +104,24 @@ const updateUser = (req, res) => {
 }
 
 
-const getUserById = (req,res) => {
+const getUserById = (req, res) => {
     const data = getData()
-    const id  = req.params.id
+    const id = req.params.id
     const index = data.findIndex(u => u.id == id)
     res.json({
-        message : "User Found!",
-        data : data[index]
+        message: "User Found!",
+        data: data[index]
     })
 }
 
 
-const getUserByToken = (req,res) => {
+const getUserByToken = (req, res) => {
     const data = getData()
     const token = req.params.token
     const userFromToken = jwt.verify(token, secret)
     res.json({
-        token : token,
-        data : userFromToken
+        token: token,
+        data: userFromToken
     })
 }
 
@@ -103,5 +131,6 @@ module.exports = {
     addUsers,
     updateUser,
     getUserById,
-    getUserByToken
+    getUserByToken,
+    loginUser
 }
