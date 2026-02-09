@@ -3,21 +3,11 @@ const categoryFilter = document.getElementById("categoryfilter");
 const typeFilter = document.getElementById("typeFilter");
 const table = document.getElementById("table");
 const noItems = document.getElementById("noItems");
-
+let transactions = []
 // let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 // let transactions = loadTransactions();
 // console.log(transactions);
-const fetchTransactions = async () => {
-  try {
-    const res = await fetch("http://localhost:3000/transactions", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
-
-    const transactions = await res.json();
-    console.log(transactions.transactions);
-    let showTransactions = (data = transactions) => {
+    let showTransactions = (data) => {
       tbody.innerHTML = "";
       data.forEach((t) => {
         const tr = document.createElement("tr");
@@ -83,6 +73,18 @@ const fetchTransactions = async () => {
         tbody.appendChild(tr);
       });
     };
+
+const fetchTransactions = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/transactions", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+
+    transactions = await res.json();
+    console.log(transactions.transactions);
+    showTransactions(transactions.transactions)
     return transactions.transactions;
   } catch(e){
     console.error("error...",e)
@@ -102,15 +104,15 @@ applyCategoryFilter = () => {
   const selectedCategory = categoryFilter.value;
   if (selectedCategory === "all") {
     noItems.innerHTML = "";
+    
     if (transactions.length === 0) {
       noItems.innerHTML = "NO ITEMS TO DISPLAY";
     }
     table.style.display = "block";
-    showTransactions(transactions);
+    showTransactions(transactions.transactions);
     return;
   }
-
-  const filtered = transactions.filter((t) => t.category === selectedCategory);
+  const filtered = transactions.transactions.filter((t) => t.category === selectedCategory);
   console.log(filtered.length);
   if (filtered.length !== 0) {
     noItems.innerHTML = "";
@@ -126,15 +128,15 @@ applyTypeFilter = () => {
   const selectedType = typeFilter.value;
   if (selectedType === "all") {
     noItems.innerHTML = "";
-    if (transactions.length === 0) {
+    if (transactions.transactions.length === 0) {
       noItems.innerHTML = "NO ITEMS TO DISPLAY";
     }
     table.style.display = "block";
-    showTransactions(transactions);
+    showTransactions(transactions.transactions);
     return;
   }
 
-  const filtered = transactions.filter((t) => t.type === selectedType);
+  const filtered = transactions.transactions.filter((t) => t.type === selectedType);
   showTransactions(filtered);
 
   if (filtered.length !== 0) {
@@ -147,30 +149,31 @@ applyTypeFilter = () => {
   }
 };
 
-tbody.addEventListener("click", (e) => {
+tbody.addEventListener("click", async(e) => {
   if (e.target.tagName !== "BUTTON") return;
 
   let hiddenInput = e.target.dataset.id;
 
-  console.log(hiddenInput);
-
   if (e.target.classList.contains("delete")) {
-    deleteTransactionById(hiddenInput);
+    try{
+      const res = await fetch(`http://localhost:3000/transactions/${hiddenInput}`,{
+        method: "DELETE",
+        headers: {"Content-Type" : "application/json"},
+        credentials: "include"
+      })
+    }catch(e){
+      console.error(e)
+    }
     applyCategoryFilter();
     applyTypeFilter();
-    transactions = loadTransactions();
-    console.log(transactions);
     fetchTransactions()
+    showTransactions(transactions.transactions)
     return;
   }
 
   if (e.target.classList.contains("edit")) {
     let hiddenEditInput = e.target.dataset.id;
-
-    console.log(hiddenEditInput);
-
-    localStorage.setItem("editId", hiddenEditInput);
-    window.location.href = "./index.html";
+    window.location.href = `index.html?transactionId=${hiddenEditInput}`;
   }
 });
 
@@ -179,16 +182,16 @@ categoryFilter.addEventListener("change", applyCategoryFilter);
 fetchTransactions()
 // showTransactions(transactions);
 
-deleteTransactionById = (id) => {
-  try {
-    let transactions = loadTransactions();
-    let updatedTransactions = transactions.filter((t) => t.id !== id);
+// deleteTransactionById = (id) => {
+//   try {
+//     let transactions = loadTransactions();
+//     let updatedTransactions = transactions.filter((t) => t.id !== id);
 
-    console.log(updatedTransactions);
-    saveTransactions(updatedTransactions);
-  } catch (err) {
-    console.log(err.message);
-  }
-};
+//     console.log(updatedTransactions);
+//     saveTransactions(updatedTransactions);
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+// };
 
 typeFilter.addEventListener("change", applyTypeFilter);

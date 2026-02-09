@@ -7,6 +7,7 @@
 // It performs real-time calculations to display total income, total expenses, current
 // balance, and monthly financial summaries without requiring a page reload.
 
+
 // DOM Manipulation – For rendering and updating UI dynamically.
 // LocalStorage – For storing income and expense data persistently.
 // Cookies – For saving user preferences.
@@ -31,14 +32,33 @@ const list = document.getElementById("list");
 const descriptionInput = document.getElementById("description");
 const categoryInput = document.getElementById("category");
 const currencyInput = document.getElementById("currency");
-// let transactions = loadTransactions();
-let editId = localStorage.getItem("editId");
+let transactions = []
 let id = localStorage.getItem("Id");
 const login = document.getElementById("login");
 const logout = document.getElementById("logout");
 const resigter = document.getElementById("register");
-
+const btn1 = document.getElementById("btn1")
+const searchparam = new URLSearchParams(window.location.search)
+let editId = searchparam.get("transactionId")
+console.log(editId)
 //-----------------------------------------------------------------------------
+const fetchTransactions = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/transactions", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
+
+    transactions = await res.json();
+    console.log(transactions.transactions);
+    return transactions.transactions;
+  } catch (e) {
+    console.error("error...", e)
+    error.textContent = "Server error";
+  }
+};
+fetchTransactions()
 
 const addTransaction = async () => {
 
@@ -57,7 +77,7 @@ const addTransaction = async () => {
   if (currency === "none") {
     currency = "INR";
   }
-  
+
   try {
     console.log("try")
     const res = await fetch("http://localhost:3000/transactions", {
@@ -76,161 +96,159 @@ const addTransaction = async () => {
       })
     })
 
-    if(!res){
+    if (!res) {
       console.log("1234")
     }
-    console.log("res...",res)
-  } catch (err) { 
+    console.log("res...", res)
+  } catch (err) {
     console.log(err)
   }
 
-  // transactions.push({
-  //   title,
-  //   amount,
-  //   type,
-  //   description,
-  //   category,
-  //   date,
-  //   currency,
-  //   id,
-  // });
 
-  // updateSummary();
-  // localStorage.removeItem("editIndex");
-  // editIndex = null;
+  updateSummary();
 
   window.location.href = "./index.html";
 
 };
 
-// updateSummary = () => {
-//   const income = transactions
-//     .filter((t) => t.type === "income")
-//     .reduce((sum, t) => sum + Number(t.amount), 0);
-//   const expense = transactions
-//     .filter((t) => t.type === "expense")
-//     .reduce((sum, t) => sum + Number(t.amount), 0);
 
-//   const convertIncomeDollar = transactions
-//     .filter((t) => t.currency === "Dollar" && t.type === "income")
-//     .reduce((sum, t) => sum + Number(t.amount) * 91, 0);
-//   const convertExpenseDollar = transactions
-//     .filter((t) => t.currency === "Dollar" && t.type === "expense")
-//     .reduce((sum, t) => sum + Number(t.amount) * 91, 0);
+updateSummary = () => {
+  console.log(transactions)
+  const income = transactions.transactions
+    .filter((t) => t.type === "income")
+    .reduce((sum, t) => sum + Number(t.amount), 0);
+  const expense = transactions.transactions
+    .filter((t) => t.type === "expense")
+    .reduce((sum, t) => sum + Number(t.amount), 0);
 
-//   const convertIncomeCanadianDollar = transactions
-//     .filter((t) => t.currency === "CanadianDollar" && t.type === "income")
-//     .reduce((sum, t) => sum + Number(t.amount) * 65, 0);
-//   const convertExpenseCanadianDollar = transactions
-//     .filter((t) => t.currency === "CanadianDollar" && t.type === "expense")
-//     .reduce((sum, t) => sum + Number(t.amount) * 65, 0);
+  const convertIncomeDollar = transactions.transactions
+    .filter((t) => t.currency === "Dollar" && t.type === "income")
+    .reduce((sum, t) => sum + Number(t.amount) * 91, 0);
+  const convertExpenseDollar = transactions.transactions
+    .filter((t) => t.currency === "Dollar" && t.type === "expense")
+    .reduce((sum, t) => sum + Number(t.amount) * 91, 0);
 
-//   const convertIncomeYen = transactions
-//     .filter((t) => t.currency === "Yen" && t.type === "income")
-//     .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0);
-//   const convertExpenseYen = transactions
-//     .filter((t) => t.currency === "Yen" && t.type === "expense")
-//     .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0);
+  const convertIncomeCanadianDollar = transactions.transactions
+    .filter((t) => t.currency === "CanadianDollar" && t.type === "income")
+    .reduce((sum, t) => sum + Number(t.amount) * 65, 0);
+  const convertExpenseCanadianDollar = transactions.transactions
+    .filter((t) => t.currency === "CanadianDollar" && t.type === "expense")
+    .reduce((sum, t) => sum + Number(t.amount) * 65, 0);
 
-//   const convertIncomePound = transactions
-//     .filter((t) => t.currency === "Pound" && t.type === "income")
-//     .reduce((sum, t) => sum + Number(t.amount) * 121, 0);
-//   const convertExpensePound = transactions
-//     .filter((t) => t.currency === "Pound" && t.type === "expense")
-//     .reduce((sum, t) => sum + Number(t.amount) * 121, 0);
+  const convertIncomeYen = transactions.transactions
+    .filter((t) => t.currency === "Yen" && t.type === "income")
+    .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0);
+  const convertExpenseYen = transactions.transactions
+    .filter((t) => t.currency === "Yen" && t.type === "expense")
+    .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0);
 
-//   const ConvertedIncome =
-//     convertIncomeCanadianDollar +
-//     convertIncomeDollar +
-//     convertIncomePound +
-//     convertIncomeYen +
-//     income;
-//   const ConvertedExpense =
-//     convertExpenseCanadianDollar +
-//     convertExpenseDollar +
-//     convertExpensePound +
-//     convertExpenseYen +
-//     expense;
+  const convertIncomePound = transactions.transactions
+    .filter((t) => t.currency === "Pound" && t.type === "income")
+    .reduce((sum, t) => sum + Number(t.amount) * 121, 0);
+  const convertExpensePound = transactions.transactions
+    .filter((t) => t.currency === "Pound" && t.type === "expense")
+    .reduce((sum, t) => sum + Number(t.amount) * 121, 0);
 
-//   totalIncome.textContent = ConvertedIncome;
-//   totalExpense.textContent = ConvertedExpense;
-//   balance.textContent = ConvertedIncome - ConvertedExpense;
-// };
+  const ConvertedIncome =
+    convertIncomeCanadianDollar +
+    convertIncomeDollar +
+    convertIncomePound +
+    convertIncomeYen +
+    income;
+  const ConvertedExpense =
+    convertExpenseCanadianDollar +
+    convertExpenseDollar +
+    convertExpensePound +
+    convertExpenseYen +
+    expense;
 
-// updateTransaction = () => {
-//   if (editId === null) return;
+  totalIncome.textContent = ConvertedIncome;
+  totalExpense.textContent = ConvertedExpense;
+  balance.textContent = ConvertedIncome - ConvertedExpense;
+};
 
-//   const t = transactions.map((c) => {
-//     if (editId == c.id) {
-//       c.title = titleInput.value;
-//       c.amount = Number(amountInput.value);
-//       c.currency = currencyInput.value || "INR";
-//       c.type = typeInput.value;
-//       c.description = descriptionInput.value;
-//       c.category = categoryInput.value;
-//       c.date = new Date().toLocaleDateString();
-//     }
-//   });
+updateTransaction = async () => {
 
-//   saveTransactions(transactions);
-//   transactions = loadTransactions();
-//   updateSummary();
+  title = titleInput.value;
+  amount = Number(amountInput.value);
+  currency = currencyInput.value || "INR";
+  type = typeInput.value;
+  description = descriptionInput.value;
+  category = categoryInput.value;
+  date = new Date().toLocaleDateString();
 
-//   localStorage.removeItem("editId");
-//   btn.textContent = "Add";
-//   editId = null;
+  try {
 
-//   window.location.href = "./Transactions.html";
-// };
+    const res = await fetch(`http://localhost:3000/transactions/${editId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        title,
+        amount,
+        type,
+        description,
+        category,
+        date,
+        currency,
+        id,
+      })
+    })
 
-// checkEditMode = () => {
-//   if (editId === null) return;
+    updateSummary();
+    editId = null;
+    window.location.href = "Transactions.html";
 
-//   console.log(editId);
-//   // editId = Number(editIndex)
-//   const t = transactions.map((c) => {
-//     if (editId === c.id) {
-//       titleInput.value = c.title;
-//       amountInput.value = c.amount;
-//       typeInput.value = c.type;
-//       descriptionInput.value = c.description;
-//       categoryInput.value = c.category;
-//       currencyInput.value = c.currency;
+  } catch (e) {
+    console.error(e)
+  }
+};
 
-//       btn.textContent = "Update";
-//     }
-//   });
+checkEditMode = async () => {
+  if (editId === null) return;
 
-//   if (!t) return;
-// };
+  console.log(editId);
+  // editId = Number(editIndex)
+  // const t = transactions.map((c) => {
+  try {
+    const res = await fetch(`http://localhost:3000/transactions/${editId}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include"
+    })
 
-// idCheck = () => {
-//   try {
-//     if (localStorage.getItem("Id")) {
-//       let id = localStorage.getItem("Id");
-//       // console.log(id)
-//       id++;
-//       localStorage.setItem("Id", Number(id));
-//     } else {
-//       localStorage.setItem("Id", 1);
-//       // idCheck()
-//     }
-//   } catch (err) {
-//     console.log(err.message);
-//   }
-// };
+    let data = await res.json()
+    console.log(data)
+    let c = data.data[0]
+    titleInput.value = c.title;
+    amountInput.value = c.amount;
+    typeInput.value = c.type;
+    descriptionInput.value = c.description;
+    categoryInput.value = c.category;
+    currencyInput.value = c.currency;
+
+    btn.textContent = "Update";
+
+  } catch (e) {
+    console.error(e)
+  }
+
+};
 
 // EVENT LISTENERS
 
 btn.addEventListener("click", () => {
-  // if (editId === null) {
-  // console.log("....")
+  if (editId === null) {
+    console.log("....")
     addTransaction();
-    // idCheck();
-  // } else {
-  //   updateTransaction();
-  // }
+  } else {
+    updateTransaction();
+  }
 });
+btn1.addEventListener("click", () => {
+  updateSummary()
+})
 
-// updateSummary();
-// checkEditMode(); 
+
+
+checkEditMode(); 
