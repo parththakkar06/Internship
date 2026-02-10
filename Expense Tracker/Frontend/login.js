@@ -19,6 +19,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     if (!res.ok) {
       error.textContent = data.message;
+      alert("Invalid Creds.")
       return;
     }
 
@@ -26,7 +27,8 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     // localStorage.setItem("refreshToken", data.refreshToken);
 
     alert("Login successful");
-  } catch {
+    window.location.href = "index.html"
+  } catch(e) {
     error.textContent = "Server error";
   }
 });
