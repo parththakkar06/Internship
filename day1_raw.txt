@@ -1,0 +1,704 @@
+cat ~/.mongodb/mongosh_repl_history
+mongosh
+mongosh > day1.txt
+cat : ~/.mongodb/mongosh_repl_history
+cat ~/.mongodb/mongosh_repl_history
+mongosh > day1.txt
+history()
+db.employees.aggregate([{$group : {_id : "$city" , departmentsPresent : {$addToSet : "$department" } , totalEmployees : {$sum : 1}}} , {$sort : {totalEmployees : -1}}])
+db.employees.aggregate([{$group : {_id : "$city" , departmentsPresent : {$addToSet : "$department" } , totalEmployees : {$sum : 1}}} ])
+db.employees.aggregate([{$group : {_id : "$city" , departmentsPresent : {$addToSet : "$department" }}} ])
+db.employees.aggregate([{$group : {_id : "$city"}} ])
+db.employees.aggregate( [ {$group : { _id : "$department" , employeeNames : {$push : "$name"} , totalEmployees : {$sum : 1} } }, {$sort : {totalEmployees : -1} } ] )
+db.employees.aggregate( [ {$group : { _id : "$department" , employeeNames : {$push : "$name"} , totalEmployees : {$sum : 1} } } ] )
+db.employees.aggregate( [ {$group : { _id : "$department" , employeeNames : {$push : "$name"} } } ] )
+db.employees.aggregate( [ {$group : { _id : "$department"}} ] )
+db.employees.aggregate([ {$group : {_id : "$department" , highestSalaryEarned : {$max : "$salary"} }}, { $match : {highestSalaryEarned : {$gt : 90000}}} , {$sort : {highestSalaryEarned : -1}}, {$project : {_id : 0 , department : "$_id" , highestSalaryEarned : 1}} ])
+db.employees.aggregate([ {$group : {_id : "$department" , highestSalaryEarned : {$max : "$salary"} }}, { $match : {highestSalaryEarned : {$gt : 90000}}} , {$sort : {highestSalaryEarned : -1}} ])
+db.employees.aggregate([ {$group : {_id : "$department" , highestSalaryEarned : {$max : "$salary"} }}, {$sort : {highestSalaryEarned : -1}} ])
+db.employees.aggregate([ {$group : {_id : "$department" , highestSalaryEarned : {$max : "$salary"} }} ])
+db.employees.aggregate([ {$group : {_id : "$department"}} ])
+])
+  }
+    $sort: { totalSalary: -1 }
+  {
+  },
+    }
+      averageSalary: { $gt: 60000 }
+      totalEmployees: { $gt: 5 },
+    $match: {
+  {
+  },
+    }
+      averageSalary: { $avg: "$salary" }
+      totalSalary: { $sum: "$salary" },
+      totalEmployees: { $sum: 1 },
+      _id: "$department",
+    $group: {
+  {
+db.employees.aggregate([
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : {totalEmployees : {$gt : 5 } , averageSalary : {$gt : 60000}} }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : {totalEmployees : {$gt : 5 } , averageSalary : {$gt : 600000}} }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : { averageSalary : {$gt : 600000} } }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : { averageSalary : {$gt : 600\000} } }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : { averageSalary : {$gt : 60 000} } }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : { averageSalary : {$gt : 60000} } }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : {totalEmployees : {$gt : 8 } , averageSalary : {$gt : 60000}} }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : {totalEmployees : {$gt : 5 } , averageSalary : {$gt : 60000}} }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : {totalEmployees : {$gt : 5 } , averageSalary : {$gt : 60000}}} }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : {averageSalary : {$gt : 60000}} }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : {totalEmployees : {$gt : 5 } , averageSalary : {$gt : 60000}} }, {$sort : {totalSalary : -1}} ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } , {$match : {totalEmployees : {$gt : 5 } , averageSalary : {$gt : 60000}} } ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , averageSalary : {$sum : "$salary"}} } ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1}} } ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , totalSalary : {$sum : "$salary" } , averageSalary : {$avg : "$salary"} , highestSalary : {$max : "$salary"} , lowestSalary : {$min : "$salary"} } } ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , totalSalary : {$sum : "$salary" } , averageSalary : {$avg : "$salary"} , highestSalary : {$max : "$salary"} } } ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , totalSalary : {$sum : "$salary" } , averageSalary : {$avg : "$salary"} } } ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} , totalSalary : {$sum : "$salary" } } } ])
+db.employees.aggregate([ {$group : { _id : "$department" , totalEmployees : {$sum : 1} } } ])
+db.employees.aggregate([ {$group : { _id : "$department"} } ])
+db.employees.aggregate([ {$group : { _id : "$department "} } ])
+db.employees.aggregate( [ {$match : {isActive : true}} , {$group : { _id : "$department" , totalSalary : {$sum : "$salary"}} } , {$sort : {totalSalary : -1}}, {$limit : 1} , {$project : { _id : 0 , totalSalary : 1 , department : "$_id"} } ])
+db.employees.aggregate( [ {$match : {isActive : true}} , {$group : { _id : "$department" , totalSalary : {$sum : "$salary"}} } , {$sort : {totalSalary : -1}}, {$limit : 1} ] )
+db.employees.aggregate( [ {$match : {isActive : true}} , {$group : { _id : "$department" , totalSalary : {$sum : "$salary"}} } ] )
+db.employees.aggregate([ {$match : {isActive : true}}, {$group : { _id : "$city" , totalSalary : {$sum : "$salary"} } } , {$sort : {totalSalary : -1} } , {$project : { _id : 0 , totalSalary : 1 , city : "$_id"} } , {$limit : 2} ])
+db.employees.aggregate([ {$match : {isActive : true}}, {$group : { _id : "$city" , totalSalary : {$sum : "$salary"} } } , {$sort : {totalSalary : -1} } , {$project : { _id : 0 , totalSalary : 1 , city : "$_id"} } ]).limit(2)
+db.employees.aggregate([ {$match : {isActive : true}}, {$group : { _id : "$city" , totalSalary : {$sum : "$salary"} } } , {$sort : {totalSalary : -1} } , {$project : { _id : 0 , totalSalary : 1 , city : "$_id"} } ])
+db.employees.aggregate([ {$match : {isActive : true}}, {$group : { _id : "$city" , totalSalary : {$sum : "$salary"} } } , {$sort : {totalSalary : -1} }])
+db.employees.aggregate([ {$match : {isActive : true}}, {$group : { _id : "$city" , totalSalary : {$sum : "$salary"} } } , {$sort : {city : -1} }])
+db.employees.aggregate([ {$match : {isActive : true}}, {$group : { _id : "$city" , totalSalary : {$sum : "$salary"} } } ])
+db.employees.aggregate([ {$match : {isActive : true}} ])
+db.employees.aggregate([{ $group : { _id : "$department", averageSalary : {$avg : "$salary"}}}, {$match : {averageSalary : {$gt : 70000}}}, {$sort : {averageSalary : -1}}, {$project : { _id : 0 , department : "$_id" , averageSalary : 1}}])
+db.employees.aggregate([{ $group : { _id : "$department", averageSalary : {$avg : "$salary"}}}, {$match : {averageSalary : {$gt : 70000}}}, {$sort : {averageSalary : -1}}])
+db.employees.aggregate([{ $group : { _id : "$department", averageSalary : {$avg : "$salary"}}}, {$match : {averageSalary : {$gt : 70000}}}, {$sort : {averageSalary : 1}}])
+db.employees.aggregate([{ $group : { _id : "$department", averageSalary : {$avg : "$salary"}}}, {$match : {averageSalary : {$gt : 70000}}}])
+db.employees.aggregate([{ $group : { _id : "$department", averageSalary : {$avg : "$salary"}}}])
+db.employees.aggregate([{ $group : { _id : "$department", averageSalary : {$avg : "$salary"}}])
+db.employees.aggregate([{ $group : { _id : "$department", averageSalary : {$avg : "$salary"}},                                         {$match : {averageSalary : {$gt : 70000}}}}])
+db.employees.aggregate({ $group : { _id : "$department", averageSalary : {$avg : "$salary"}}, {$match : {averageSalary : {$gt : 70000}}}})
+db.employees.aggregate({ $group : { _id : "$department", averageSalary : {$avg : "$salary"}}})
+db.employees.aggregate({ $group : { _id : "$departments", averageSalary : {$avg : "$salary"}}})
+db.employees.aggregate({ $group : { _id : "$departments", averageSalary : {$avg : "$salary"}})
+db.employees.aggregate({ $group : { _id : "$departments" averageSalary : {$avg : "$salary"}})
+])
+  }
+    }
+      salary: 1
+      name: 1,
+      department: "$_id",
+      _id: 0,
+    $project: {
+  {
+  },
+    $sort: { salary: -1 }
+  {
+  },
+    }
+      salary: { $first: "$salary" }
+      name: { $first: "$name" },
+      _id: "$department",
+    $group: {
+  {
+  },
+    $sort: { department: 1, salary: -1 }
+  {
+db.employees.aggregate([
+db.employees.aggregate([ {$group : {_id : "$department" , highestPaidEmployee : {$max : "$salary"}, name : {$first : "$name"}}} , {$sort : {highestPaidEmployee : -1}}, {$project : {_id : 0 , department : "$_id" , highestPaidEmployee : 1 , name : 1, salary : 1 }}])
+db.employees.aggregate([ {$group : {_id : "$department" , highestPaidEmployee : {$max : "$salary"}, name : "$name" }} , {$sort : {highestPaidEmployee : -1}}, {$project : {_id : 0 , department : "$_id" , highestPaidEmployee : 1 , name : 1, salary : 1 }}])
+db.employees.aggregate([ {$group : {_id : "$department" , highestPaidEmployee : {$max : "$salary", name}}} , {$sort : {highestPaidEmployee : -1}}, {$project : {_id : 0 , department : "$_id" , highestPaidEmployee : 1 , name : 1, salary : 1 }}])
+db.employees.aggregate([ {$group : {_id : "$department" , highestPaidEmployee : {$max : "$salary"}}} , {$sort : {highestPaidEmployee : -1}}, {$project : {_id : 0 , department : "$_id" , highestPaidEmployee : 1 , name : 1, salary : 1 }}])
+db.employees.aggregate([ { $match : { isActive : true }} , { $group : { _id : "$city", totalSalary : {$sum : "$salary" } } }, { $sort : {totalSalary : -1} } , {$project : { _id : 0 , city : "$_id" , totalSalary : 1}}])
+db.employees.aggregate([ { $match : { isActive : true }} , { $group : { _id : "$city", totalSalary : {$sum : 1 } } }, { $sort : {totalSalary : -1} } , {$project : { _id : 0 , city : "$_id" , totalSalary : 1}}])
+db.employees.aggregate([ { $match : { isActive : true }} , { $group : { _id : "$salary", totalSalary : {$sum : 1 } } }, { $sort : {totalSalary : -1} } ])
+db.employees.aggregate([ { $match : { isActive : true }} , { $group : { _id : "$salary", totalSalary : {$sum : 1 } } }, { $sort : {totalSalary : -1} } , {$project : { _id : 0 , city : "$_id" , totalSalary : 1}}])
+db.employees.aggregate([ { $match : { isActive : true }} , { $group : { _id : "$salary", totalSalary : {sum : 1 } }}, {$project : { _id : 0 , city : "$_id" , totalSalary : 1}}])
+db.employees.aggregate([ { $match : { isActive : true }} , { $group : { _id : "$salary", totalSalary : {sum : 1 } } {$project : { _id : 0 , city : "$_id" , totalSalary : 1}}])
+db.employees.aggregate([ { $match : { isActive : true }} , { $group : { _id : "$salary", totalSalary : {sum : 1 } } , { $sort : {totalSalary : -1} } , {$project : { _id : 0 , city : "$_id" , totalSalary : 1}}])
+db.employees.aggregate([ { $match : { isActive : true }} , { $group : { _id : "$salary", totalSalary : {sum : 1 } } , { $sort : {totalSalary : -1} } , {$project : { _id : 0 , city : "$_id" , totalSalary : 1}}
+db.employees.aggregate([ { $match : { isActive : true }} , { $group : { _id : "$salary", totalSalary : {sum : 1 } } , { $sort : {totalSalary : -1}
+db.employees.aggregate([ { $group: { _id: "$department", averageSalary : { $avg: "$salary" } } }, { $project: { _id: 0, department: "$_id", averageSalary: 1 } }])
+db.employees.aggregate([ { $group: { _id: "$department", average: { $avg: "$salary" } } }, { $project: { _id: 0, department: "$_id", average: 1 } }])
+db.employees.aggregate([ { $group : { _id : "$department", average : { $avg : "$salary" } }}])
+db.employees.aggregate([ { $group : { _id : "$department",average : { $avg : "$salary" } }])
+db.employees.aggregate([ { $group : { _id : "$department" },{ $avg : "$salary" } }]
+db.employees.aggregate([ { $group : { _id : "$department" },{ $avg : "$salary" } }])
+db.employees.aggregate([ { $group : { _id : "$department", $avg : "$salary" } }])
+db.employees.aggregate([ { $group : { _id : "$department", } }, { $avg : { $sum : "$salary"}} ])
+db.employees.aggregate([ { $group : { _id : "$department", $avg : "$salary" } }])
+db.employees.aggregate([ { $group : { _id : "$department", $avg : "salary" } }])
+db.employees.aggregate([ { $group : { _id : "$department", } }, { $avg : { $sum : "salary"}} ])
+db.employees.aggregate([ { $group : { _id : "$department", } }, { $avg : { $sum : {"salary"}}} ])
+db.employees.aggregate([ { $group : { _id : "$department", } }, { $avg : { $sum : {"salary"}
+db.employees.aggregate([{$group : {_id : "$department" , count : {$sum : 1}}}, {$sort : {count : -1}}])
+])
+  }
+    $sort: { count: -1 }
+  {
+  },
+    }
+      count: { $sum: 1 }
+      _id: "$department",
+    $group: {
+  {
+db.employees.aggregate([
+db.employees.aggregate([ { $project: { fullname: "$name", salary: 1, _id: 0 } }] )
+it
+db.employees.aggregate([ { $project: { name: 1, salary: 1, _id: 0 } }] )
+db.employees.aggregate([ { $group: { _id: "$age", totalEmployees: { $sum: 1 } } }] ).sort({_id : 1})
+db.employees.aggregate([ { $group: { _id: "$age", totalEmployees: { $sum: 1 } } }] ).sort()
+db.employees.aggregate([ { $group: { _id: "$age", totalEmployees: { $sum: 1 } } }] )
+db.employees.aggregate([ { $group: { _id: "$city", totalEmployees: { $sum: 1 } } }] )
+db.employees.aggregate([ { $group: { _id: "$department", totalEmployees: { $sum: 1 } } }] )
+db.employees.aggregate([ { $group: { _id: "$IT", totalEmployees: { $sum: 1 } } }] )
+db.employees.aggregate([ { $group: { _id: "IT", totalEmployees: { $sum: 1 } } }] )
+db.employees.aggregate([{$match : {city : "Mumbai"}}])
+})
+  ]
+    { age: { $lt: 28 }, city: "Ahmedabad" }
+    { salary: { $gt: 80000 }, department: "Finance" },
+  $or: [
+  joining_date: { $gte: ISODate("2019-01-01") },
+  isActive: true,
+db.employees.find({
+db.employees.find({isActive : true , joining_date : {$gte : ISODate("2019-01-01")} , $or : [{salary : {$gt : 80000},department : "Finance" }, {age : {$lt : 28}, city : "Ahmedabad"}]})
+db.employees.find({isActive : true , joining_date : {$gte : ISODate("2018-01-01"),$lt : ISODate("2019-01-01")} , $or : [{salary : {$gt : 80000},department : "Finance" }, {age : {$lt : 28}, city : "Ahmedabad"}]})
+db.employees.find({isActive : true , joining_date : {$gte : ISODate("2018-01-01"),$lt : ISODate("2019-01-01")}})
+db.employees.find({isActive : true , joining_date : {$gt : ISODate("2018-01-01")}})
+db.employees.find({isActive : true , joining_date : {$gt : "2018-01-01"}})
+db.employees.find({isActive : true })
+db.employees.find({joining_date : {$gte : ISODate('2019-01-01'),$lt : ISODate('2020-01-01')}, salary: {$gt : 50000 , $lt : 90000}, department : {$in : ["IT", "Finance"]}, city : {$ne : "Mumbai"}, age : {$ne : 30}})
+db.employees.find({joining_date : {$gte : ISODate('2019-01-01'),$lt : ISODate('2020-01-01')}, salary: {$gt : 50000 , $lt : 90000}, department : {$in : ["IT", "Finance"]}, city : {$ne : "Mumbai"}, age : {$ne : 30})
+db.employees.find({joining_date : {$gte : ISODate('2019-01-01'),$lt : ISODate('2020-01-01')}, salary: {$gt : 50000 , $lt : 90000}, department : {$in : ["IT", "Finance"]}, city : {$ne : "Mumbai"}})
+db.employees.find({joining_date : {$gte : ISODate('2019-01-01'),$lt : ISODate('2020-01-01')}, salary: {$gt : 50000 , $lt : 90000}, department : {$in : ["IT", "Finance"]}})
+db.employees.find({joining_date : {$gte : ISODate('2019-01-01'),$lt : ISODate('2020-01-01')}, salary: {$gt : 50000 , $lt : 90000}})
+db.employees.find({joining_date : {$gte : ISODate('2019-01-01'),$lt : ISODate('2020-01-01')}})
+db.employees.find({joining_date : {$gt : ISODate('2019-01-01'),$lt : ISODate('2020-01-01')}})
+db.employees.find({joining_date : {$gt : ISODate(''),$lt : ISODate()}})
+db.employees.find({isActive : true , $or : [{city : "Mumbai" , salary : {$gt : 70000}} , {city : "Pune" , age : {$gt : 30}}]})
+db.employees.find({isActive : true , $or : [{ $and : [ {city : "Mumbai"} , {salary {$gt : 70000}}]} , {$and :  [ {city : "Pune"} , {age : {$gt : 30}}]}]})
+db.employees.find({isActive : true , $or : [{city : "Mumbai" , salary {$gt : 70000}} , {city : "Pune" , age : {$gt : 30}}]})
+db.employees.find({joining_date : {$lt : ISODate('2020-01-01T00:00:00.000Z')}, $and : [{salary : {$gt : 60000}},{salary : {$lt : 90000}}], city : {$nin : ["Delhi"]}})
+db.employees.update({age : {$gt : 45}},{$set : {isActive : false}})
+db.employees.update({age : {gt : 45}},{$set : {active : false}})
+db.employees.remove({salary : {$lt : 40000}})
+db.employees.find({age : {gt : 45}})
+db.employees.update({age : {gt : 45}},{$set : {active : false}})
+db.employees.update({age : {gt : 45},{$set : {active : false}}})
+db.employees.find({age : {gt : 45},{$set : {active : false}}})
+db.employees.find({age : {gt : 45}},{$set : {active : false}})
+db.employees.find().sort({age : 1}).limit(1)
+db.employees.find().sort({age : 1}).skip(1).limit(1)
+db.employees.find().sort({salary : -1}).limit(3)
+db.employees.find({city : {$in: ["Mumbai","Pune"]}, salary : {$gt : 60000}})
+db.employees.find({joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}, salary : {$gt : 70000}})
+db.employees({joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}, salary : {$gt : 70000}})
+db.employees.find().skip(5).limit(5)
+it
+db.employees.find().skip(5).limit(5)
+])
+{ name:"Shreya Ghosh", age:30, city:"Mumbai", salary:62000, department:"IT", isActive:true, joining_date:new Date("2020-10-30"), gender:"Female" }
+{ name:"Kunal Arora", age:44, city:"Pune", salary:99000, department:"Finance", isActive:false, joining_date:new Date("2016-01-16"), gender:"Male" },
+{ name:"Divya Choudhary", age:28, city:"Delhi", salary:49000, department:"HR", isActive:true, joining_date:new Date("2023-05-02"), gender:"Female" },
+{ name:"Rajat Mishra", age:33, city:"Ahmedabad", salary:76000, department:"IT", isActive:true, joining_date:new Date("2019-11-23"), gender:"Male" },
+{ name:"Aisha Sheikh", age:27, city:"Mumbai", salary:54000, department:"Sales", isActive:true, joining_date:new Date("2022-09-07"), gender:"Female" },
+{ name:"Saurabh Kulkarni", age:40, city:"Pune", salary:87000, department:"Finance", isActive:true, joining_date:new Date("2017-04-13"), gender:"Male" },
+{ name:"Tanvi Bhatt", age:31, city:"Delhi", salary:60000, department:"HR", isActive:true, joining_date:new Date("2021-08-04"), gender:"Female" },
+{ name:"Yash Agarwal", age:42, city:"Mumbai", salary:98000, department:"IT", isActive:false, joining_date:new Date("2016-06-29"), gender:"Male" },
+{ name:"Nikita Soni", age:23, city:"Pune", salary:35000, department:"Sales", isActive:true, joining_date:new Date("2024-01-10"), gender:"Female" },
+{ name:"Harsh Trivedi", age:37, city:"Ahmedabad", salary:81000, department:"Finance", isActive:true, joining_date:new Date("2018-02-08"), gender:"Male" },
+{ name:"Isha Malhotra", age:29, city:"Delhi", salary:56000, department:"HR", isActive:true, joining_date:new Date("2019-12-15"), gender:"Female" },
+{ name:"Deepak Yadav", age:34, city:"Mumbai", salary:69000, department:"IT", isActive:true, joining_date:new Date("2020-05-21"), gender:"Male" },
+{ name:"Kavya Reddy", age:26, city:"Pune", salary:47000, department:"Sales", isActive:true, joining_date:new Date("2023-03-19"), gender:"Female" },
+{ name:"Aditya Jain", age:39, city:"Ahmedabad", salary:92000, department:"IT", isActive:true, joining_date:new Date("2017-10-03"), gender:"Male" },
+{ name:"Priya Nair", age:28, city:"Delhi", salary:63000, department:"HR", isActive:true, joining_date:new Date("2022-06-17"), gender:"Female" },
+{ name:"Manish Gupta", age:50, city:"Mumbai", salary:115000, department:"Finance", isActive:false, joining_date:new Date("2015-03-11"), gender:"Male" },
+{ name:"Simran Kaur", age:33, city:"Pune", salary:74000, department:"IT", isActive:true, joining_date:new Date("2019-07-22"), gender:"Female" },
+{ name:"Rohit Desai", age:30, city:"Ahmedabad", salary:52000, department:"Sales", isActive:true, joining_date:new Date("2021-12-01"), gender:"Male" },
+{ name:"Ananya Roy", age:36, city:"Delhi", salary:83000, department:"Finance", isActive:true, joining_date:new Date("2018-05-09"), gender:"Female" },
+{ name:"Sahil Khan", age:27, city:"Mumbai", salary:46000, department:"IT", isActive:true, joining_date:new Date("2020-09-18"), gender:"Male" },
+{ name:"Meera Joshi", age:31, city:"Pune", salary:58000, department:"Sales", isActive:true, joining_date:new Date("2021-01-30"), gender:"Female" },
+{ name:"Vikas Rao", age:45, city:"Delhi", salary:105000, department:"IT", isActive:false, joining_date:new Date("2016-08-19"), gender:"Male" },
+{ name:"Pooja Shah", age:24, city:"Ahmedabad", salary:39000, department:"HR", isActive:true, joining_date:new Date("2023-02-14"), gender:"Female" },
+{ name:"Arjun Singh", age:38, city:"Mumbai", salary:67000, department:"Sales", isActive:true, joining_date:new Date("2019-06-25"), gender:"Male" },
+{ name:"Neha Kapoor", age:29, city:"Pune", salary:61000, department:"HR", isActive:true, joining_date:new Date("2022-04-12"), gender:"Female" },
+{ name:"Rahul Verma", age:41, city:"Delhi", salary:95000, department:"Finance", isActive:false, joining_date:new Date("2017-09-01"), gender:"Male" },
+{ name:"Sneha Iyer", age:35, city:"Mumbai", salary:88000, department:"IT", isActive:true, joining_date:new Date("2018-11-20"), gender:"Female" },
+{ name:"Karan Mehta", age:26, city:"Ahmedabad", salary:48000, department:"Sales", isActive:true, joining_date:new Date("2020-01-05"), gender:"Male" },
+{ name:"Riya Patel", age:32, city:"Delhi", salary:72000, department:"Finance", isActive:true, joining_date:new Date("2021-07-10"), gender:"Female" },
+{ name:"Amit Sharma", age:28, city:"Mumbai", salary:55000, department:"IT", isActive:true, joining_date:new Date("2019-03-15"), gender:"Male" },
+db.employees.insertMany([
+use test
+show dbs
+db.users.save({_id:"ObjectId('66eace5839ad85a9648b6473')",name:"amitabh"})
+db.users.find()
+db.users.updateMany({},{$set : {DOB : "01-01-1990"}})
+db.users.find({name: "seeta"})
+db.users.update({name: "seeta"}, {$set : {age : 27}})
+db.users.insert({name:"seeta",age:25,city:"Ahmedabad",gender:"female"})
+db.users.remove({name: {$in: ['amit','sumit','vijay']}},1)
+db.users.remove({name: {$in: ['amit','sumit','vijay']}})
+db.user.remove({criteria})
+db.employees.find({joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')},$or : [{salary : {$gt : 20000}},{age : {$gt : 30}}], isactive : true})
+db.employees.find({joining_date : {gt : ISODate('2020-01-01T00:00:00.000Z')},$or : [{salary : {$gt : 20000}},{age : {$gt : 30}}], isactive : true})
+db.employees.find({joining_date : {gt : ISODate('2020-01-01T00:00:00.000Z')},$or : [{salary : {$gt : 20000}},{age : {$gt : 30}}])
+db.employees.find({joining_date : {gt : ISODate('2020-01-01T00:00:00.000Z')},$or : [{salary : {$gt : 20000}},{age : {$gt : 30}}], isactive : "true"})
+db.employees.find({joining_date : {gt : ISODate('2020-01-01T00:00:00.000Z')},$or : [{salary : {$gt : 20000}},{age : {$gt : 30}}], isactive : true})
+db.employees.find({joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')},$or: [ {salary : {$gt : 20000}},{age : {$gt : 30}} ]})
+db.employees.find({joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')},{$or: [ {salary : {$gt : 20000}},{age : {$gt : 30}} ]})
+db.employees.find({joining_date : ISODate('2020-01-01T00:00:00.000Z')},{$or: [ {salary : {$gt : 20000}},{age : {$gt : 30}} ]})
+db.employees.find({joining_date : ISODate('2020-01-01T00:00:00.000Z')},$or: [ {salary : {$gt : 20000}},{age : {$gt : 30}} ])
+db.employees.find({joining_date : ISODate('2020-01-01T00:00:00.000Z')},$or: [ {salary : {$gt : 20000}},{age : {$gt : 30}} ]})
+db.employees.find({joining_date : ISODate('2020-01-01T00:00:00.000Z')},{$or: [ {salary : {$gt : 20000}},{age : {$gt : 30}} ]})
+})
+  ]
+    { age: { $gt: 30 } }
+    { salary: { $gt: 20000 } },
+  $or: [
+  joining_date: { $gt: ISODate("2020-01-01T00:00:00.000Z") },
+db.employees.find({
+db.employees.find( { $and : [ { joining_date : {gt : ISODate('2020-01-01T00:00:00.000Z')}} , { $or : [ {salary : {$gt : 20000}} , {age : {$gt : 30}} ] }  ] } )
+db.employees.find( { $and : [ { joining_date : {gt : ISODate('2020-01-01T00:00:00.000Z')}} , { $or : [ {salary : {$gt : 20000}} , {age : {$gt : 30}} ] ] } )
+})
+  age: { $gt: 30 }
+  salary: { $gt: 20000 },
+  joining_date: { $gt: ISODate('2020-01-01T00:00:00.000Z') },
+db.employees.find({
+db.employees.find({$and:[{joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}},{salary : {$gt : 20000}}, {age : {$gt : 30 } }]})
+db.employees.find( { $and: [{ joining_date: { $gt: ISODate('2020-01-01T00:00:00.000Z') } }, { salary: { $gt: 20000 } }, { age: { $gt: 30 } }] })
+db.employees.find({ $and   [
+db.employees.find({$and:[{joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}},{salary : {$gt : 20000}}]})
+db.employees.find($and:[{joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}},{salary : {$gt : 20000}}])
+db.employees.find({joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}},{salary : {$gt : 20000}}]
+db.employees.find({joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}},{salary : {$gt : 20000}}])
+db.employees.find($and:[{joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}},{salary : {$gt : 20000}}])
+  },
+db.employees.find($and:[{joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}},{salary : {$gt : 20000}}])
+db.employees.find($and[{joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}},{salary : {$gt : 20000}}])
+db.employees.find({joining_date : {$gt : ISODate('2020-01-01T00:00:00.000Z')}})
+db.employees.find({joining_date : {$lt : '01-01-2020'}})
+db.employees.find({joining_date : {$lt : '01/01/2020'}})
+db.employees.find({joining_date : {$gt : '01/01/2020'}})
+db.employees.find({joining_date : {$gt : '2020-01-01'}})
+db.employees.find({joining_date : {$gt : '01-01-2020'}})
+db.employees.find()
+show collections
+use internship
+show dbs
+db.employees.find().sort({salary:-1}).limit(1)
+db.employees.find().sort({age : -1,salary:-1}).limit(1)
+db.employees.find().sort({age : -1,salary:-1})
+db.employees.find({gender : "female",city: "Pune"}).sort({age : 1}).limit(1)
+db.employees.find({gender : "female"})
+db.employees.find({gender : "female")
+db.employees.find({gender : "female",city: "mumbai"})
+db.employees.find({gender : "female",city: "mumbai"}).limit(1)
+db.employees.find({gender : "female",city: "mumbai"}).sort({age : 1}).limit(1)
+db.employees.find({city: "pune"})
+db.employees.find({gender : "female",city: "pune"})
+db.employees.find({gender : "female",city: "pune"}).limit(1)
+db.employees.find({gender : "female",city: "pune"}).sort({age : 1}).limit(1)
+db.employees.find({gender : "female"}).sort({age : 1}).limit(1)
+db.employees.find().sort({age : -1}).limit(1)
+db.employees.find().sort({age : 2}).limit(1)
+db.employees.find().sort({age : 0}).limit(1)
+db.employees.find().sort({age : 1}).limit(1)
+db.employees.find({salary : {$gt : 20000}, age : {$gt : 30}})
+it
+db.employees.find({salary : {$gt : 20000}})
+db.employees.find({salary : $gt20000})
+db.employees.find({salary : $gt 20000})
+db.employees.find({city:"Mumbai"})
+db.employees.find({city:"mumbai"})
+])
+  }
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2009-12-01"),
+    post: "Chief Architect",
+    salary: 130000,
+    married: true,
+    city: "Delhi",
+    age: 52,
+    name: "Prakash Nanda",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2021-05-26"),
+    post: "Digital Marketer",
+    salary: 29000,
+    married: false,
+    city: "Mumbai",
+    age: 27,
+    name: "Farah Ali",
+  {
+  },
+    gender: "male"
+    isactive: false,
+    joining_date: new Date("2018-11-03"),
+    post: "Operations Executive",
+    salary: 43000,
+    married: true,
+    city: "Lucknow",
+    age: 34,
+    name: "Akash Tiwari",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2017-06-28"),
+    post: "Scrum Master",
+    salary: 58000,
+    married: true,
+    city: "Kochi",
+    age: 36,
+    name: "Divya Menon",
+  {
+  },
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2021-01-12"),
+    post: "Network Engineer",
+    salary: 31000,
+    married: false,
+    city: "Nashik",
+    age: 29,
+    name: "Sanjay Patil",
+  {
+  },
+    gender: "female"
+    isactive: false,
+    joining_date: new Date("2018-04-16"),
+    post: "Accounts Executive",
+    salary: 41000,
+    married: true,
+    city: "Udaipur",
+    age: 33,
+    name: "Naina Choudhary",
+  {
+  },
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2011-09-09"),
+    post: "Regional Head",
+    salary: 95000,
+    married: true,
+    city: "Bhopal",
+    age: 47,
+    name: "Raj Malviya",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2023-06-01"),
+    post: "Trainee",
+    salary: 20000,
+    married: false,
+    city: "Udaipur",
+    age: 22,
+    name: "Isha Jain",
+  {
+  },
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2020-02-20"),
+    post: "Data Analyst",
+    salary: 35000,
+    married: false,
+    city: "Indore",
+    age: 30,
+    name: "Harsh Vardhan",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2012-01-17"),
+    post: "HR Head",
+    salary: 78000,
+    married: true,
+    city: "Bangalore",
+    age: 42,
+    name: "Kavita Rao",
+  {
+  },
+    gender: "male"
+    isactive: false,
+    joining_date: new Date("2016-07-30"),
+    post: "Sales Manager",
+    salary: 46000,
+    married: true,
+    city: "Jaipur",
+    age: 37,
+    name: "Manish Gupta",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2022-08-11"),
+    post: "Content Analyst",
+    salary: 26000,
+    married: false,
+    city: "Chandigarh",
+    age: 25,
+    name: "Simran Kaur",
+  {
+  },
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2013-03-21"),
+    post: "Tech Lead",
+    salary: 85000,
+    married: true,
+    city: "Noida",
+    age: 44,
+    name: "Deepak Yadav",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2020-09-07"),
+    post: "QA Engineer",
+    salary: 33000,
+    married: false,
+    city: "Hyderabad",
+    age: 27,
+    name: "Ayesha Khan",
+  {
+  },
+    gender: "male"
+    isactive: false,
+    joining_date: new Date("2019-05-14"),
+    post: "Backend Developer",
+    salary: 52000,
+    married: false,
+    city: "Gurgaon",
+    age: 32,
+    name: "Nikhil Bansal",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2015-10-19"),
+    post: "Product Owner",
+    salary: 70000,
+    married: true,
+    city: "Pune",
+    age: 39,
+    name: "Meera Joshi",
+  {
+  },
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2023-02-01"),
+    post: "Intern",
+    salary: 18000,
+    married: false,
+    city: "Mumbai",
+    age: 23,
+    name: "Arjun Kapoor",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2018-12-01"),
+    post: "Operations Lead",
+    salary: 48000,
+    married: true,
+    city: "Delhi",
+    age: 34,
+    name: "Ritu Malhotra",
+  {
+  },
+    gender: "male"
+    isactive: false,
+    joining_date: new Date("2017-04-03"),
+    post: "System Admin",
+    salary: 54000,
+    married: true,
+    city: "Chennai",
+    age: 38,
+    name: "Suresh Iyer",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2022-06-10"),
+    post: "UI Designer",
+    salary: 32000,
+    married: false,
+    city: "Bangalore",
+    age: 26,
+    name: "Pooja Nair",
+  {
+  },
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2016-02-25"),
+    post: "Project Manager",
+    salary: 65000,
+    married: true,
+    city: "Thane",
+    age: 41,
+    name: "Vikas Rane",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2021-11-18"),
+    post: "Recruiter",
+    salary: 30000,
+    married: false,
+    city: "Nagpur",
+    age: 29,
+    name: "Anjali Deshmukh",
+  {
+  },
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2020-07-01"),
+    post: "Support Engineer",
+    salary: 25000,
+    married: false,
+    city: "Mumbai",
+    age: 27,
+    name: "Rohit Joshi",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2018-09-12"),
+    post: "Business Analyst",
+    salary: 36000,
+    married: true,
+    city: "Pune",
+    age: 31,
+    name: "Sneha Kulkarni",
+  {
+  },
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2010-08-01"),
+    post: "Director",
+    salary: 120000,
+    married: true,
+    city: "Ahmedabad",
+    age: 50,
+    name: "Karan Patel",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2022-01-05"),
+    post: "HR",
+    salary: 22000,
+    married: false,
+    city: "Pune",
+    age: 24,
+    name: "Priya Singh",
+  {
+  },
+    gender: "male"
+    isactive: false,
+    joining_date: new Date("2019-11-20"),
+    post: "Tester",
+    salary: 42000,
+    married: true,
+    city: "Mumbai",
+    age: 35,
+    name: "Rahul Mehta",
+  {
+  },
+    gender: "female"
+    isactive: true,
+    joining_date: new Date("2021-03-15"),
+    post: "Developer",
+    salary: 28000,
+    married: false,
+    city: "Pune",
+    age: 28,
+    name: "Neha Verma",
+  {
+  },
+    gender: "male"
+    isactive: true,
+    joining_date: new Date("2014-06-10"),
+    post: "Manager",
+    salary: 90000,
+    married: true,
+    city: "Mumbai",
+    age: 45,
+    name: "Amit Sharma",
+  {
+db.employees.insertMany([
+db.users.find({$or:[{name:"amit"},{age:23}]})
+db.users.find({$and:[{name:"seeta"},{gender:"female"}]})
+db.users.find({$and:[{name:"amit"},{age:24}]})
+db.users.find({$and:[{name:"amit"},{age:23}]})
+db.users.find().sort({name : 1})
+db.users.find().sort({age : 1})
+db.users.find().skip(2)
+db.users.find().limit(2)
+db.users.find({name : 'amit'}).count()
+db.users.find({name : 'amit'})
+db.users.find({name : {$in:["amit","seeta","ajay"], $options:"i"}})
+db.users.find({name:{$regex : "^a", $options:"i"}})
+db.users.find({name:{$regex : "a"}})
+db.users.find({name:{$regex : "a$"}})
+db.users.find({name:{$regex : "^a"}})
+db.users.find({name:{$regex : "^A"}})
+db.users.find({name:{$exists:false}})
+db.users.find({name:{$exists:true}})
+db.users.find({name:{$eq:"amit"}})
+db.users.find({name:{$ne:"amit"}})
+db.users.find({name : {$nin:["amit","seeta","ajay"]}})
+db.users.find({name : {$in:["amit","seeta","ajay"]}})
+db.users.find({name : {$in:["amit","seeta","ajay"],$options:"i"}})
+db.users.find({name : {$in:["amit","seeta","ajay","kush"],$options: "i"}})
+db.users.find({name : {$in:["amit"],$options: "i"}})
+db.users.find({name : {$in:["amit"]},$options: "i"})
+db.users.find({name : {$in:["amit"]}})
+db.users.find({age : {$gt : 23} , salary : {$gt : 15000}})
+db.users.find({age : {$lt : 24}})
+db.users.find({age : {$lte : 24}})
+db.users.find({age : {$gte : 24}})
+db.users.find({age : {$gt : 24}})
+db.users.find({age : {$gt : 25}})
+db.users.find()
+use internship
+db.users.find()
+db.users.find({ name: "amit", age: 23 }) && { name: "ram" }
+db.users.find({name : "amit", age:23})
+db.users.find({name : "amit"})
+db.users.find()
+{name:"vijay",age:26,status:false,gender:"male",city:"Ahmedabad",salary:20000}])
+{name:"kunal",age:26,status:false,gender:"male",city:"Pune",salary:16000},
+{name:"seeta",age:25,status:true,gender:"female",city:"Ahmedabad",salary:15000},
+db.users.insert([{name:"amit",age:24,status:true,gender:"male",city:"Ahmedabad",salary:12000},
+db.users.insert({name:"amit",age:24,status:true,gender:"male",city:"Ahmedabad",salary:12000})
+db.users.insert([{name:"kunal",age:22},{name:"seeta",age:23,gender:"female"}])
+db.users.find().pretty()
+db.users.find()
+db.users.insert({age:24 , gender : "male"})
+clrscr
+clr
+clear
+db.users.find().pretty()
+db.users.find()
+show collections
+db.users.insert({name : "ram", age:21})
+db.users.insert({name : "ram" age:21})
+show collections
+db.createCollection("users")
+show collections
+db.gamers.find().pretty()
+db.gamers.find({name : "Parth"})
+db.gamers.find()
+show collections
+show dbs
+db.gamers.insertOne({ name: "Aryan", role: "Runner", createdAt: new Date() })
+db.gamers.insertOne({ name: "Vansh", role: "Hard Carried", createdAt: new Date() })
+db.gamers.insertOne({ name: "Parth", role: "Sniper", createdAt: new Date() })
+use internship
+db
+show dbs
+showdb
