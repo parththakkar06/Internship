@@ -26,14 +26,18 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     }
 
     try {
-        const res = await fetch("http://localhost:3000/transactions", {
+        const res = await fetch("http://localhost:3000/user/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             credentials : 'include',
             body: JSON.stringify({
-                
+                id,
+                name,
+                email,
+                password,
+                age
             })
         });
 

@@ -18,6 +18,8 @@ app.use(cors(corsOptions))
 const userRoutes = require("./routes/UserRoutes")
 app.use("/user",userRoutes)
 
+const uploadRoutes = require("./routes/UploadRoutes")
+app.use("/",uploadRoutes)
 
 const PORT = 3000;
 app.listen(PORT , ()=>{

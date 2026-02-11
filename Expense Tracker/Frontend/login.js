@@ -11,7 +11,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
     const res = await fetch("http://localhost:3000/user/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials : "include",
+      credentials: "include",
       body: JSON.stringify({ email, password })
     });
 
@@ -19,14 +19,16 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     if (!res.ok) {
       error.textContent = data.message;
+      alert("Invalid Creds.")
       return;
     }
 
-    localStorage.setItem("accessToken", data.accessToken);
-    localStorage.setItem("refreshToken", data.refreshToken);
+    // localStorage.setItem("accessToken", data.accessToken);
+    // localStorage.setItem("refreshToken", data.refreshToken);
 
     alert("Login successful");
-  } catch {
+    window.location.href = "index.html"
+  } catch(e) {
     error.textContent = "Server error";
   }
 });
