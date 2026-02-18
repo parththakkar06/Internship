@@ -9,6 +9,9 @@ app.use(cookieParser())
 const userRoutes = require("./routes/UserRoutes")
 app.use("/user",userRoutes)
 
+const securityRoutes = require("./routes/SecurityRoutes")
+app.use("/",securityRoutes)
+
 //server connection 
 const PORT = 3000
 app.listen(PORT, () => {
