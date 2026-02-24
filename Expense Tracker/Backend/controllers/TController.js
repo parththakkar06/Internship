@@ -2,53 +2,28 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const secret = "parth"
 // const secret2 = "thakkar"
+const tModel = require("../models/TModel")
 
-// if (typeof localStorage === "undefined" || localStorage === null) {
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./scratch');
-// }
-
-const getTransactions = () => {
-    try {
-        return JSON.parse(localStorage.getItem("transactions")) || [];
-
-    }catch(err) {
-        console.error("Getlocal",err)
-    }
-}
-
-const getID = () => {
-    try {
-        return localStorage.getItem("id") || 1;
-    }catch(err) {
-        console.error("Getlocal",err)
-    }
-}
-
-const getAllTransactions = (req, res) => {
-    const transactions = getTransactions()
-    res.json({ transactions })
-}
-
-
-const addTransactions = (req, res) => {
-    const data = getTransactions()
-    let id = getID()
-    console.log(id)
-    req.body.id = ++id;
-    data.push(req.body)
-    localStorage.setItem("id",id)
-    localStorage.setItem("transactions", JSON.stringify(data))
+const getAllTransactions = async (req, res) => {
+    const transactions = await tModel.find()
     res.json({
-        message : "Transaction Added."
+        data: transactions
     })
 }
 
 
-const getTransactionById = (req, res) => {
-    const data = getTransactions()
+const addTransactions = async (req, res) => {
+    const newTransaction = await tModel.create(req.body)
+    res.json({
+        message: "Transaction Added.",
+        data: newTransaction
+    })
+}
+
+
+const getTransactionById = async (req, res) => {
     const id = req.params.id
-    const foundTransaction = data.filter(u => u.id == id)
+    const foundTransaction = await tModel.findById(id)
     if (foundTransaction.length > 0) {
         res.json({
             message: "Transaction Found!",
@@ -62,32 +37,32 @@ const getTransactionById = (req, res) => {
 }
 
 
-const deleteTransactionById = (req, res) => {
-    const data = getTransactions()
+const deleteTransactionById = async (req, res) => {
     const id = req.params.id
-    const index = data.findIndex(u => u.id == id)
-    const deletedTransaction = data.filter(u => u.id == id)
-    if (index !== -1) {
-        data.splice(index, 1)
-        localStorage.setItem("transactions", JSON.stringify(data))
+    try {
+        const deletedTransaction = await tModel.findByIdAndDelete(id)
+
         res.json({
             message: "Transaction Deleted Successfully",
             data: deletedTransaction
         })
+    } catch (err) {
+        res.json({
+            message: "Problem occured",
+            error: err.message
+        })
     }
 }
 
-const updateTransaction = (req, res) => {
-    const data = getTransactions()
-    const id = req.params.id
-    const index = data.findIndex(u => u.id == id)
-    if (index !== -1) {
-        data[index] = req.body;
-        localStorage.setItem("transactions", JSON.stringify(data))
+const updateTransaction = async(req, res) => {
+    try {
+        const updatedTransaction = await tModel.findOneAndUpdate(req.params.id,req.body,{new:true})
         res.json({
             message: "Transaction Updated Successfully",
-            data: req.body
+            data: updatedTransaction
         })
+    } catch (err) {
+
     }
 }
 
