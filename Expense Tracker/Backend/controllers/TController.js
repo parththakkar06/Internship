@@ -24,7 +24,7 @@ const addTransactions = async (req, res) => {
 const getTransactionById = async (req, res) => {
     const id = req.params.id
     const foundTransaction = await tModel.findById(id)
-    if (foundTransaction.length > 0) {
+    if (foundTransaction) {
         res.json({
             message: "Transaction Found!",
             data: foundTransaction,
@@ -56,13 +56,18 @@ const deleteTransactionById = async (req, res) => {
 
 const updateTransaction = async(req, res) => {
     try {
-        const updatedTransaction = await tModel.findOneAndUpdate(req.params.id,req.body,{new:true})
+        const id = req.params.id
+        console.log(id)
+        const updatedTransaction = await tModel.findByIdAndUpdate(id,req.body,{new:true})
         res.json({
             message: "Transaction Updated Successfully",
             data: updatedTransaction
         })
     } catch (err) {
-
+        res.json({
+            message : "problem occured",
+            error : err.message
+        })
     }
 }
 

@@ -4,22 +4,20 @@ const typeFilter = document.getElementById("typeFilter");
 const table = document.getElementById("table");
 const noItems = document.getElementById("noItems");
 let transactions = []
-// let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-// let transactions = loadTransactions();
-// console.log(transactions);
     let showTransactions = (data) => {
       tbody.innerHTML = "";
       data.forEach((t) => {
+        console.log(t._id)
         const tr = document.createElement("tr");
 
         const hiddenInput = document.createElement("input");
         hiddenInput.setAttribute("type", "hidden");
-        hiddenInput.setAttribute("id", localStorage.getItem("Id")); // The 'hidden id'
+        hiddenInput.setAttribute("id", t._id); // The 'hidden id'
         hiddenInput.setAttribute("class", "hiddenInput");
 
         const hiddenEditInput = document.createElement("input");
         hiddenEditInput.setAttribute("type", "hidden");
-        hiddenEditInput.setAttribute("id", localStorage.getItem("Id")); // The 'hidden id'
+        hiddenEditInput.setAttribute("id", t._id); // The 'hidden id'
         hiddenEditInput.setAttribute("class", "hiddenInput");
 
         const titleTd = document.createElement("td");
@@ -29,7 +27,8 @@ let transactions = []
         categoryTd.textContent = t.category;
 
         const dateTd = document.createElement("td");
-        dateTd.textContent = t.date;
+        const date = new Date(t.createdAt)
+        dateTd.textContent = date.toDateString();
 
         const typeTd = document.createElement("td");
         typeTd.textContent = t.type;
@@ -49,12 +48,12 @@ let transactions = []
         const editBtn = document.createElement("button");
         editBtn.textContent = "Edit";
         editBtn.className = "edit";
-        editBtn.dataset.id = t.id;
+        editBtn.dataset.id = t._id;
 
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
         deleteBtn.className = "delete";
-        deleteBtn.dataset.id = t.id;
+        deleteBtn.dataset.id = t._id;
 
         actionsDiv.appendChild(editBtn);
         deleteBtn.appendChild(hiddenInput);
@@ -83,8 +82,8 @@ const fetchTransactions = async () => {
     });
 
     transactions = await res.json();
-    console.log(transactions.transactions);
-    showTransactions(transactions.transactions)
+    console.log(transactions.data);
+    showTransactions(transactions.data)
     return transactions.transactions;
   } catch(e){
     console.error("error...",e)
@@ -109,10 +108,10 @@ applyCategoryFilter = () => {
       noItems.innerHTML = "NO ITEMS TO DISPLAY";
     }
     table.style.display = "block";
-    showTransactions(transactions.transactions);
+    showTransactions(transactions.data);
     return;
   }
-  const filtered = transactions.transactions.filter((t) => t.category === selectedCategory);
+  const filtered = transactions.data.filter((t) => t.category === selectedCategory);
   console.log(filtered.length);
   if (filtered.length !== 0) {
     noItems.innerHTML = "";
@@ -128,15 +127,15 @@ applyTypeFilter = () => {
   const selectedType = typeFilter.value;
   if (selectedType === "all") {
     noItems.innerHTML = "";
-    if (transactions.transactions.length === 0) {
+    if (transactions.data.length === 0) {
       noItems.innerHTML = "NO ITEMS TO DISPLAY";
     }
     table.style.display = "block";
-    showTransactions(transactions.transactions);
+    showTransactions(transactions.data);
     return;
   }
 
-  const filtered = transactions.transactions.filter((t) => t.type === selectedType);
+  const filtered = transactions.data.filter((t) => t.type === selectedType);
   showTransactions(filtered);
 
   if (filtered.length !== 0) {
@@ -153,7 +152,6 @@ tbody.addEventListener("click", async(e) => {
   if (e.target.tagName !== "BUTTON") return;
 
   let hiddenInput = e.target.dataset.id;
-
   if (e.target.classList.contains("delete")) {
     try{
       const res = await fetch(`http://localhost:3000/transactions/${hiddenInput}`,{
@@ -167,7 +165,7 @@ tbody.addEventListener("click", async(e) => {
     applyCategoryFilter();
     applyTypeFilter();
     fetchTransactions()
-    showTransactions(transactions.transactions)
+    showTransactions(transactions.data)
     return;
   }
 
@@ -180,18 +178,6 @@ tbody.addEventListener("click", async(e) => {
 categoryFilter.addEventListener("change", applyCategoryFilter);
 
 fetchTransactions()
-// showTransactions(transactions);
 
-// deleteTransactionById = (id) => {
-//   try {
-//     let transactions = loadTransactions();
-//     let updatedTransactions = transactions.filter((t) => t.id !== id);
-
-//     console.log(updatedTransactions);
-//     saveTransactions(updatedTransactions);
-//   } catch (err) {
-//     console.log(err.message);
-//   }
-// };
 
 typeFilter.addEventListener("change", applyTypeFilter);

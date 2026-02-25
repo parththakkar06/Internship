@@ -79,7 +79,6 @@ const addTransaction = async () => {
   }
 
   try {
-    console.log("try")
     const res = await fetch("http://localhost:3000/transactions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -114,38 +113,38 @@ const addTransaction = async () => {
 
 updateSummary = () => {
   console.log(transactions)
-  const income = transactions.transactions
+  const income = transactions.data
     .filter((t) => t.type === "income")
     .reduce((sum, t) => sum + Number(t.amount), 0);
-  const expense = transactions.transactions
+  const expense = transactions.data
     .filter((t) => t.type === "expense")
     .reduce((sum, t) => sum + Number(t.amount), 0);
 
-  const convertIncomeDollar = transactions.transactions
+  const convertIncomeDollar = transactions.data
     .filter((t) => t.currency === "Dollar" && t.type === "income")
     .reduce((sum, t) => sum + Number(t.amount) * 91, 0);
-  const convertExpenseDollar = transactions.transactions
+  const convertExpenseDollar = transactions.data
     .filter((t) => t.currency === "Dollar" && t.type === "expense")
     .reduce((sum, t) => sum + Number(t.amount) * 91, 0);
 
-  const convertIncomeCanadianDollar = transactions.transactions
+  const convertIncomeCanadianDollar = transactions.data
     .filter((t) => t.currency === "CanadianDollar" && t.type === "income")
     .reduce((sum, t) => sum + Number(t.amount) * 65, 0);
-  const convertExpenseCanadianDollar = transactions.transactions
+  const convertExpenseCanadianDollar = transactions.data
     .filter((t) => t.currency === "CanadianDollar" && t.type === "expense")
     .reduce((sum, t) => sum + Number(t.amount) * 65, 0);
 
-  const convertIncomeYen = transactions.transactions
+  const convertIncomeYen = transactions.data
     .filter((t) => t.currency === "Yen" && t.type === "income")
     .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0);
-  const convertExpenseYen = transactions.transactions
+  const convertExpenseYen = transactions.data
     .filter((t) => t.currency === "Yen" && t.type === "expense")
     .reduce((sum, t) => sum + Number(t.amount) * 0.5, 0);
 
-  const convertIncomePound = transactions.transactions
+  const convertIncomePound = transactions.data
     .filter((t) => t.currency === "Pound" && t.type === "income")
     .reduce((sum, t) => sum + Number(t.amount) * 121, 0);
-  const convertExpensePound = transactions.transactions
+  const convertExpensePound = transactions.data
     .filter((t) => t.currency === "Pound" && t.type === "expense")
     .reduce((sum, t) => sum + Number(t.amount) * 121, 0);
 
@@ -219,7 +218,7 @@ checkEditMode = async () => {
 
     let data = await res.json()
     console.log(data)
-    let c = data.data[0]
+    let c = data.data
     titleInput.value = c.title;
     amountInput.value = c.amount;
     typeInput.value = c.type;
