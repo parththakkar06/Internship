@@ -118,14 +118,28 @@ export class AppComponent {
   //   this.displayOneDiv = !this.displayOneDiv
   // }
 
-  color = "peach"
+  // color = "peach"
 
-  handleColor(val:string){
-    this.color = val
+  // handleColor(val:string){
+  //   this.color = val
+  // }
+
+  // changeColor(event : Event){
+  //   this.color = (event.target as HTMLInputElement).value
+  // }
+
+
+  users = ['Ram' , 'Shyam' , 'Raj' , 'Rahul' , 'Rudra']
+
+  students = [
+    {name : 'Ram' , age : 20 , email : "Ram@gmail.com"},
+    {name : 'Shyam' , age : 20 , email : "Shyam@gmail.com"},
+    {name : 'Raj' , age : 20 , email : "Raj@gmail.com"},
+    {name : 'Rahul' , age : 20 , email : "Rahul@gmail.com"},
+    {name : 'Rudra' , age : 20 , email : "Rudra@gmail.com"}
+  ]
+
+  getName(name:string){
+    console.log(name)
   }
-
-  changeColor(event : Event){
-    this.color = (event.target as HTMLInputElement).value
-  }
-
 }

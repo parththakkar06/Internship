@@ -89,7 +89,7 @@
 <div style="background-color: cornflowerblue; width: 100px; height: 100px;"></div>
 } -->
 
-
+<!-- 
 <h1>Switch Case in Angluar 19</h1>
 
 <button (click) = "handleColor('red')">Red</button>
@@ -117,4 +117,29 @@
   @default{
     <h1 style="background-color: black; color: wheat;">NO MATCH</h1>
   }
+} -->
+
+
+<h1>Loops in Angular</h1>
+
+<!-- <h1>{{users[0]}}</h1>
+<h1>{{users[1]}}</h1>
+<h1>{{users[2]}}</h1>
+<h1>{{users[3]}}</h1>
+<h1>{{users[4]}}</h1> -->
+
+@for(user of users;track user){
+  <h2>{{user}}</h2>
+}
+
+<hr>
+
+@for(student of students;track student.name; let id=$index){
+  <h2>
+    <span>{{id+1}} </span>
+    <span>{{student.name}} </span>
+    <span>{{student.age}} </span>
+    <span>{{student.email}} </span>
+    <button (click) = "getName(student.name)">get name</button>
+  </h2>
 }
