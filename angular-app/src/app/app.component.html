@@ -66,7 +66,7 @@
 
 } -->
 
-<button (click) = "hide()"> Hide </button>
+<!-- <button (click) = "hide()"> Hide </button>
 <button (click) = "show()"> Show </button>
 <button (click) = "toggle()">Toggle</button>
 <button (click) = "toggle()"> {{display?'hide':'show'}} </button>
@@ -87,4 +87,34 @@
 }
 @else{
 <div style="background-color: cornflowerblue; width: 100px; height: 100px;"></div>
+} -->
+
+
+<h1>Switch Case in Angluar 19</h1>
+
+<button (click) = "handleColor('red')">Red</button>
+<button (click) = "handleColor('green')">Green</button>
+<button (click) = "handleColor('blue')">Blue</button>
+<button (click) = "handleColor('yellow')">Yellow</button>
+
+
+<input type="text" (input) = "changeColor($event)">
+
+@switch(color){
+
+  @case('red'){
+    <h1 style="background-color: red;">Red Color</h1>
+  }
+  @case('blue'){
+    <h1 style="background-color: blue;">Red Color</h1>
+  }
+  @case('green'){
+    <h1 style="background-color: green;">Red Color</h1>
+  }
+  @case('yellow'){
+    <h1 style="background-color: yellow;">Red Color</h1>
+  }
+  @default{
+    <h1 style="background-color: black; color: wheat;">NO MATCH</h1>
+  }
 }

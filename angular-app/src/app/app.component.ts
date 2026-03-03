@@ -98,23 +98,34 @@ export class AppComponent {
   //   console.log(value)
   // }
 
-  display = true
-  value = 10
-  displayOneDiv = true
+  // display = true
+  // value = 10
+  // displayOneDiv = true
 
-  hide(){
-    this.display = false
+  // hide(){
+  //   this.display = false
+  // }
+
+  // show(){
+  //   this.display = true
+  // }
+
+  // toggle(){
+  //   this.display = !this.display
+  // }
+
+  // toggleDiv(){
+  //   this.displayOneDiv = !this.displayOneDiv
+  // }
+
+  color = "peach"
+
+  handleColor(val:string){
+    this.color = val
   }
 
-  show(){
-    this.display = true
+  changeColor(event : Event){
+    this.color = (event.target as HTMLInputElement).value
   }
 
-  toggle(){
-    this.display = !this.display
-  }
-
-  toggleDiv(){
-    this.displayOneDiv = !this.displayOneDiv
-  }
 }
