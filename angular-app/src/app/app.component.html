@@ -54,8 +54,37 @@
 
 
 
-{{username}}
+<!-- {{username}}
 <br>
 <input (input) = "getUserName($event)" type="text" #userNameField>
 <button (click) = "setUserName()">set username</button>
-<button (click) = getUserNameWithTemplate(userNameField.value) >get username</button>
+<button (click) = getUserNameWithTemplate(userNameField.value) >get username</button> -->
+
+<!-- @if(value > 5){
+
+<div style="background-color: salmon; height: 200px; width: 200px;"></div>
+
+} -->
+
+<button (click) = "hide()"> Hide </button>
+<button (click) = "show()"> Show </button>
+<button (click) = "toggle()">Toggle</button>
+<button (click) = "toggle()"> {{display?'hide':'show'}} </button>
+
+@if(display){
+
+<div style="background-color: aqua; height: 200px; width: 200px;"></div>
+
+}
+
+<hr>
+<hr>
+
+<button (click) = "toggleDiv()">Toggle</button>
+
+@if(displayOneDiv){
+<div style="background-color: blue; width: 100px; height: 100px;"></div>
+}
+@else{
+<div style="background-color: cornflowerblue; width: 100px; height: 100px;"></div>
+}

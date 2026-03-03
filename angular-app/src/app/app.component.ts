@@ -84,17 +84,37 @@ export class AppComponent {
 
 
 
-  username = ""
+  // username = ""
 
-  getUserName(event : Event){
-    this.username = (event.target as HTMLInputElement).value
+  // getUserName(event : Event){
+  //   this.username = (event.target as HTMLInputElement).value
+  // }
+
+  // setUserName(){
+  //   this.username = "Peter"
+  // }
+
+  // getUserNameWithTemplate(value:string){
+  //   console.log(value)
+  // }
+
+  display = true
+  value = 10
+  displayOneDiv = true
+
+  hide(){
+    this.display = false
   }
 
-  setUserName(){
-    this.username = "Peter"
+  show(){
+    this.display = true
   }
 
-  getUserNameWithTemplate(value:string){
-    console.log(value)
+  toggle(){
+    this.display = !this.display
+  }
+
+  toggleDiv(){
+    this.displayOneDiv = !this.displayOneDiv
   }
 }
