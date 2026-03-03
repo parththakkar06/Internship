@@ -55,30 +55,46 @@ export class AppComponent {
   //   this.typedValue = input.value
   // }
 
-  count = 0;
+  // count = 0;
 
-  increase() {
-    console.log
-    this.count++;
+  // increase() {
+  //   console.log
+  //   this.count++;
+  // }
+
+  // decrease() {
+  //   this.count--;
+  // }
+
+  // reset() {
+  //   this.count = 0;
+  // }
+
+  // handleCounter(val: string) {
+  //   if (val == 'minus') {
+  //     if (this.count != 0) {
+  //       this.count--
+  //     }
+  //   } else if (val == 'plus') {
+  //     this.count++
+  //   } else {
+  //     this.count = 0
+  //   }
+  // }
+
+
+
+  username = ""
+
+  getUserName(event : Event){
+    this.username = (event.target as HTMLInputElement).value
   }
 
-  decrease() {
-    this.count--;
+  setUserName(){
+    this.username = "Peter"
   }
 
-  reset() {
-    this.count = 0;
-  }
-
-  handleCounter(val: string) {
-    if (val == 'minus') {
-      if (this.count != 0) {
-        this.count--
-      }
-    } else if (val == 'plus') {
-      this.count++
-    } else {
-      this.count = 0
-    }
+  getUserNameWithTemplate(value:string){
+    console.log(value)
   }
 }

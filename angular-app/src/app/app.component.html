@@ -41,7 +41,7 @@
 
 
 
-<h1>Counter App</h1>
+<!-- <h1>Counter App</h1>
 <div style="text-align: center;">
   <h3 class="count">{{count}}</h3>
   <div>
@@ -49,4 +49,13 @@
     <button class="btn bg-black" (click) = "handleCounter('')">Reset</button>
     <button class="btn bg-green" (click) = "handleCounter('plus')">Increment</button>
   </div>
-</div>
+</div> -->
+
+
+
+
+{{username}}
+<br>
+<input (input) = "getUserName($event)" type="text" #userNameField>
+<button (click) = "setUserName()">set username</button>
+<button (click) = getUserNameWithTemplate(userNameField.value) >get username</button>
