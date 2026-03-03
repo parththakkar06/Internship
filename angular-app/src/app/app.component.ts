@@ -142,4 +142,10 @@ export class AppComponent {
   getName(name:string){
     console.log(name)
   }
+
+  handleEvent(event : Event){
+    // console.log("function called" , event.type);
+    console.log((event.target as HTMLInputElement).value);
+    
+  }
 }

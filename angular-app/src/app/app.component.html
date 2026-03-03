@@ -143,3 +143,11 @@
     <button (click) = "getName(student.name)">get name</button>
   </h2>
 }
+
+<div style="background-color: green; width: 100px; height: 100px;" (mouseenter) = "handleEvent($event)"></div>
+
+<div style="background-color: rosybrown; width: 100px; height: 100px;" (mouseleave) = "handleEvent($event)"></div>
+
+
+<br><br>
+<input type="text" name="user" (blur) = "handleEvent($event)" (focus) = "handleEvent($event)" (input) = "handleEvent($event)">
