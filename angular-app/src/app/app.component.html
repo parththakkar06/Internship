@@ -1,4 +1,4 @@
-<h1>Angular Training</h1>
+<!-- <h1>Angular Training</h1> -->
 
 <!-- <p>Counter : {{ count }}</p>
 
@@ -33,8 +33,20 @@
 
 
 
-<input (input) = "onInput($event)">
+<!-- <input (input) = "onInput($event)">
 <p>You typed : {{typedValue}}</p>
 
 <app-login></app-login>
-<app-signup></app-signup>
+<app-signup></app-signup> -->
+
+
+
+<h1>Counter App</h1>
+<div style="text-align: center;">
+  <h3 class="count">{{count}}</h3>
+  <div>
+    <button (click) = "handleCounter('minus')" class="btn bg-red" >Decrement</button>
+    <button class="btn bg-black" (click) = "handleCounter('')">Reset</button>
+    <button class="btn bg-green" (click) = "handleCounter('plus')">Increment</button>
+  </div>
+</div>

@@ -49,9 +49,36 @@ export class AppComponent {
   // imageUrl = "https://in.pinterest.com/pin/artistic-wallpaper--621496817359389265/";
 
 
-  typedValue = ''
-  onInput(event : Event){
-    const input = event.target as HTMLInputElement
-    this.typedValue = input.value
+  // typedValue = ''
+  // onInput(event : Event){
+  //   const input = event.target as HTMLInputElement
+  //   this.typedValue = input.value
+  // }
+
+  count = 0;
+
+  increase() {
+    console.log
+    this.count++;
+  }
+
+  decrease() {
+    this.count--;
+  }
+
+  reset() {
+    this.count = 0;
+  }
+
+  handleCounter(val: string) {
+    if (val == 'minus') {
+      if (this.count != 0) {
+        this.count--
+      }
+    } else if (val == 'plus') {
+      this.count++
+    } else {
+      this.count = 0
+    }
   }
 }
