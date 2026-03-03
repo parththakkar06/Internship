@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
@@ -129,23 +129,43 @@ export class AppComponent {
   // }
 
 
-  users = ['Ram' , 'Shyam' , 'Raj' , 'Rahul' , 'Rudra']
+  users = ['Ram', 'Shyam', 'Raj', 'Rahul', 'Rudra']
 
   students = [
-    {name : 'Ram' , age : 20 , email : "Ram@gmail.com"},
-    {name : 'Shyam' , age : 20 , email : "Shyam@gmail.com"},
-    {name : 'Raj' , age : 20 , email : "Raj@gmail.com"},
-    {name : 'Rahul' , age : 20 , email : "Rahul@gmail.com"},
-    {name : 'Rudra' , age : 20 , email : "Rudra@gmail.com"}
+    { name: 'Ram', age: 20, email: "Ram@gmail.com" },
+    { name: 'Shyam', age: 20, email: "Shyam@gmail.com" },
+    { name: 'Raj', age: 20, email: "Raj@gmail.com" },
+    { name: 'Rahul', age: 20, email: "Rahul@gmail.com" },
+    { name: 'Rudra', age: 20, email: "Rudra@gmail.com" }
   ]
 
-  getName(name:string){
+  getName(name: string) {
     console.log(name)
   }
 
-  handleEvent(event : Event){
+  handleEvent(event: Event) {
     // console.log("function called" , event.type);
     console.log((event.target as HTMLInputElement).value);
-    
+
+  }
+
+
+  data = 100
+  count = signal(10)
+
+  constructor() {
+    effect(() => {
+      console.log(this.count());
+
+    })
+  }
+
+  updateValue(val: string) {
+    // this.count.set(20)
+    if(val == 'inc'){
+      this.count.set(this.count()+1)
+    }else{
+      this.count.set(this.count()-1)
+    }
   }
 }

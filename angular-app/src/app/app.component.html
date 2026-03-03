@@ -151,3 +151,13 @@
 
 <br><br>
 <input type="text" name="user" (blur) = "handleEvent($event)" (focus) = "handleEvent($event)" (input) = "handleEvent($event)">
+
+<br>
+<br>
+{{data}} <br>
+{{count()}}
+<br>
+<!-- <button (click) = "updateValue()">Change Value</button> -->
+
+<button (click) = "updateValue('inc')">Inc</button>
+<button (click) = "updateValue('dec')">Dec</button>
