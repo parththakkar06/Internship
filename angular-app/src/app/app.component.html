@@ -220,4 +220,12 @@
 {{name}} -->
 
 
-  <app-todolist></app-todolist>
+  <!-- <app-todolist></app-todolist> -->
+
+  <h1
+  [style.backgroundColor] = "bgColor"
+  [style.fontSize.px] = "fontSize">Dynamic Style</h1>
+
+  <h1
+  [style.fontSize]="zoom?headingSizeBig:headingSizeSmall">Heading</h1>
+  <button (click)="updateHeadingSize()">toggle</button>

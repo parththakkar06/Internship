@@ -227,4 +227,15 @@ export class AppComponent {
   //   this.name = val
   // }
 
+
+  bgColor = "green"
+  fontSize = "30"
+  headingSizeBig = "80px"
+  headingSizeSmall = "30px"
+
+  zoom = true
+
+  updateHeadingSize(){
+    this.zoom = !this.zoom
+  }
 }
