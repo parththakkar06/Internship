@@ -170,26 +170,48 @@ export class AppComponent {
   // }
 
   // data = signal<number | string>(10)
-  data:WritableSignal<number> = signal(10)
-  coun : Signal<number> =computed(()=>20)
+  // data:WritableSignal<number> = signal(10)
+  // coun : Signal<number> =computed(()=>20)
 
-  updateValue(){
-    // this.data.set("ello")
-    this.data.update(val => val + 10)
+  // updateValue(){
+  //   // this.data.set("ello")
+  //   this.data.update(val => val + 10)
+  // }
+
+
+  // x = signal(20)
+  // y = signal(30)
+  // z = computed(()=>this.x() + this.y())
+
+  // updateValues(){
+  //   console.log(this.z());
+  //   this.x.set(100)
+  //   console.log(this.z())
+  // }
+
+  // updateXValue(){
+  //   this.x.set(1000)
+  // }
+
+  userName = signal('Anil')
+  count = signal(0)
+  displayHeading = false
+
+  constructor(){
+    effect(()=>{
+      if(this.count()==2){
+        this.displayHeading = true
+        setTimeout(() => {
+        this.displayHeading = false
+        }, 2000);
+      }else{
+        this.displayHeading = false
+      }
+    })
   }
 
-
-  x = signal(20)
-  y = signal(30)
-  z = computed(()=>this.x() + this.y())
-
-  updateValues(){
-    console.log(this.z());
-    this.x.set(100)
-    console.log(this.z())
-  }
-
-  updateXValue(){
-    this.x.set(1000)
+  toggleValue(){
+    // this.displayHeading = !this.displayHeading
+    this.count.set(this.count()+1)
   }
 }
