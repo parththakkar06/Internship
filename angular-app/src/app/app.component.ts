@@ -239,48 +239,56 @@ export class AppComponent {
   //   this.zoom = !this.zoom
   // }  
 
-  students = ['aron','mitchel','daryl','sam','tony']
+  // students = ['aron','mitchel','daryl','sam','tony']
 
-  employees = [
-    {
-      name : 'mit',
-      age : 20,
-      email : "mit@test.com"
-    },
-    {
-      name : 'smit',
-      age : 23,
-      email : "smit@test.com"
-    },
-    {
-      name : 'darsh',
-      age : 25,
-      email : "darsh@test.com"
-    },
-    {
-      name : 'ram',
-      age : 28,
-      email : "ram@test.com"
-    },
-    {
-      name : 'deep',
-      age : 21,
-      email : "deep@test.com"
-    },
-    {
-      name : 'ak',
-      age : 27,
-      email : "ak@test.com"
-    },
-    {
-      name : 'Finch',
-      age : 22,
-      email : "finch@test.com"
-    },
-    {
-      name : 'aaron',
-      age : 25,
-      email : "aaron@test.com"
-    }
-  ]
+  // employees = [
+  //   {
+  //     name : 'mit',
+  //     age : 20,
+  //     email : "mit@test.com"
+  //   },
+  //   {
+  //     name : 'smit',
+  //     age : 23,
+  //     email : "smit@test.com"
+  //   },
+  //   {
+  //     name : 'darsh',
+  //     age : 25,
+  //     email : "darsh@test.com"
+  //   },
+  //   {
+  //     name : 'ram',
+  //     age : 28,
+  //     email : "ram@test.com"
+  //   },
+  //   {
+  //     name : 'deep',
+  //     age : 21,
+  //     email : "deep@test.com"
+  //   },
+  //   {
+  //     name : 'ak',
+  //     age : 27,
+  //     email : "ak@test.com"
+  //   },
+  //   {
+  //     name : 'Finch',
+  //     age : 22,
+  //     email : "finch@test.com"
+  //   },
+  //   {
+  //     name : 'aaron',
+  //     age : 25,
+  //     email : "aaron@test.com"
+  //   }
+  // ]
+
+  login = false
+
+  block = 0
+
+  update(){
+    this.block++;
+  }
 }

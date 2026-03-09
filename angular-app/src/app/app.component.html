@@ -230,7 +230,7 @@
   [style.fontSize]="zoom?headingSizeBig:headingSizeSmall">Heading</h1>
   <button (click)="updateHeadingSize()">toggle</button> -->
 
-  <h1>NgFor directive</h1>
+  <!-- <h1>NgFor directive</h1>
 
   <ul>
     <li *ngFor = "let student of students">
@@ -245,4 +245,29 @@
     <li *ngFor = "let emp of employees">
       {{emp.name}}, {{emp.age}} , {{emp.email}}
     </li>
-  </ul>
+  </ul> -->
+
+<h1>ngif directive</h1>
+
+<div *ngIf = "login else elseBlock">
+  <a href="/">login</a>
+</div>
+
+<ng-template #elseBlock>
+  <a href="/">logout</a>
+</ng-template>
+<br>
+
+
+<br><br>
+<div *ngIf = "block==0">
+  <h1>Heading 0</h1>
+</div>
+<div *ngIf = "block==1">
+  <h1>Heading 1</h1>
+</div>
+<div *ngIf = "block==2">
+  <h1>Heading 2</h1>
+</div>
+
+<button (click) = "update()">change</button>
