@@ -193,25 +193,27 @@ export class AppComponent {
   //   this.x.set(1000)
   // }
 
-  userName = signal('Anil')
-  count = signal(0)
-  displayHeading = false
+//   userName = signal('Anil')
+//   count = signal(0)
+//   displayHeading = false
 
-  constructor(){
-    effect(()=>{
-      if(this.count()==2){
-        this.displayHeading = true
-        setTimeout(() => {
-        this.displayHeading = false
-        }, 2000);
-      }else{
-        this.displayHeading = false
-      }
-    })
-  }
+//   constructor(){
+//     effect(()=>{
+//       if(this.count()==2){
+//         this.displayHeading = true
+//         setTimeout(() => {
+//         this.displayHeading = false
+//         }, 2000);
+//       }else{
+//         this.displayHeading = false
+//       }
+//     })
+//   }
 
-  toggleValue(){
-    // this.displayHeading = !this.displayHeading
-    this.count.set(this.count()+1)
-  }
+//   toggleValue(){
+//     // this.displayHeading = !this.displayHeading
+//     this.count.set(this.count()+1)
+//   }
+  users = [ 'Rio' , 'Berlin' , 'Tokyo' , 'Italy' , 'Amsterdam' , 'Washington' , 'Mexico']
+  //users = []
 }
