@@ -284,11 +284,17 @@ export class AppComponent {
   //   }
   // ]
 
-  login = false
+  // login = false
 
-  block = 0
+  // block = 0
 
-  update(){
-    this.block++;
+  // update(){
+  //   this.block++;
+  // }
+
+  color = "black"
+
+  changeColor(color:string){
+    this.color = color
   }
 }

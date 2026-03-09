@@ -247,7 +247,7 @@
     </li>
   </ul> -->
 
-<h1>ngif directive</h1>
+<!-- <h1>ngif directive</h1>
 
 <div *ngIf = "login else elseBlock">
   <a href="/">login</a>
@@ -270,4 +270,19 @@
   <h1>Heading 2</h1>
 </div>
 
-<button (click) = "update()">change</button>
+<button (click) = "update()">change</button> -->
+
+<button (click) = "changeColor('red')">Red</button>
+<button (click) = "changeColor('green')">Green</button>
+<button (click) = "changeColor('orange')">Orange</button>
+<button (click) = "changeColor('pink')">Pink</button>
+<button (click) = "changeColor('blue')">Blue</button>
+
+<div [ngSwitch]="color">
+<h1 *ngSwitchCase="'red'" style="background-color: red;">Red Colour</h1>
+<h1 *ngSwitchCase="'green'" style="background-color: green;">Green Colour</h1>
+<h1 *ngSwitchCase="'orange'" style="background-color: orange;">Orange Colour</h1>
+<h1 *ngSwitchCase="'pink'" style="background-color: pink;">Pink Colour</h1>
+<h1 *ngSwitchCase="'blue'" style="background-color: blue;">Blue Colour</h1>
+<h1 *ngSwitchDefault>NO Color Match</h1>
+</div>
