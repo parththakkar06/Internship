@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SignupComponent, CommonModule, LoginComponent],
+  imports: [RouterOutlet, SignupComponent, CommonModule, LoginComponent, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -214,6 +215,13 @@ export class AppComponent {
 //     // this.displayHeading = !this.displayHeading
 //     this.count.set(this.count()+1)
 //   }
-  users = [ 'Rio' , 'Berlin' , 'Tokyo' , 'Italy' , 'Amsterdam' , 'Washington' , 'Mexico']
+//  users = [ 'Rio' , 'Berlin' , 'Tokyo' , 'Italy' , 'Amsterdam' , 'Washington' , 'Mexico']
   //users = []
+
+  name = ""
+
+  changeName(event : Event){
+    const val = (event.target as HTMLInputElement).value
+    this.name = val
+  }
 }

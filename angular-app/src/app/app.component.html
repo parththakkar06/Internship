@@ -183,7 +183,7 @@
 } -->
 
 
-@for(user of users ; track user){
+<!-- @for(user of users ; track user){ -->
   <!-- <h3>this is our {{$index+1}} and name is {{user}}</h3> -->
   <!-- <h4>{{$last}}</h4> -->
   <!-- @if($first){
@@ -197,16 +197,24 @@
   } -->
 
 
-  @if($odd){
+  <!-- @if($odd){
     <h3 style="background-color: sandybrown;">this is our {{$index}} and name is {{user}}</h3> 
   }@else{
     <h3 style="background-color: firebrick;">this is our {{$index}} and name is {{user}}</h3>
-  }
+  } -->
   <!-- {{$count}} -->
 
-}
+<!-- } -->
 
 
-  @empty(){
+  <!-- @empty(){
     <h1>NO RECORD FOUND</h1>
-  } 
+  }  -->
+
+
+<!-- <input [(ngModel)]="name" type="text" placeholder="enter your name">
+  {{name}} -->
+
+
+<input type="text" placeholder="enter name" (input) = "changeName($event)">
+{{name}}
