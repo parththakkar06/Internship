@@ -4,14 +4,16 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
+import { TodolistComponent } from './todolist/todolist.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SignupComponent, CommonModule, LoginComponent, FormsModule],
+  imports: [RouterOutlet, SignupComponent, CommonModule, LoginComponent, FormsModule , TodolistComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  
   title = 'angular-app';
   // count = 0;
   // increase() {
@@ -218,10 +220,11 @@ export class AppComponent {
 //  users = [ 'Rio' , 'Berlin' , 'Tokyo' , 'Italy' , 'Amsterdam' , 'Washington' , 'Mexico']
   //users = []
 
-  name = ""
+  // name = ""
 
-  changeName(event : Event){
-    const val = (event.target as HTMLInputElement).value
-    this.name = val
-  }
+  // changeName(event : Event){
+  //   const val = (event.target as HTMLInputElement).value
+  //   this.name = val
+  // }
+
 }
