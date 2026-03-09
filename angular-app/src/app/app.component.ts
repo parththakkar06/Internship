@@ -228,14 +228,59 @@ export class AppComponent {
   // }
 
 
-  bgColor = "green"
-  fontSize = "30"
-  headingSizeBig = "80px"
-  headingSizeSmall = "30px"
+  // bgColor = "green"
+  // fontSize = "30"
+  // headingSizeBig = "80px"
+  // headingSizeSmall = "30px"
 
-  zoom = true
+  // zoom = true
 
-  updateHeadingSize(){
-    this.zoom = !this.zoom
-  }
+  // updateHeadingSize(){
+  //   this.zoom = !this.zoom
+  // }  
+
+  students = ['aron','mitchel','daryl','sam','tony']
+
+  employees = [
+    {
+      name : 'mit',
+      age : 20,
+      email : "mit@test.com"
+    },
+    {
+      name : 'smit',
+      age : 23,
+      email : "smit@test.com"
+    },
+    {
+      name : 'darsh',
+      age : 25,
+      email : "darsh@test.com"
+    },
+    {
+      name : 'ram',
+      age : 28,
+      email : "ram@test.com"
+    },
+    {
+      name : 'deep',
+      age : 21,
+      email : "deep@test.com"
+    },
+    {
+      name : 'ak',
+      age : 27,
+      email : "ak@test.com"
+    },
+    {
+      name : 'Finch',
+      age : 22,
+      email : "finch@test.com"
+    },
+    {
+      name : 'aaron',
+      age : 25,
+      email : "aaron@test.com"
+    }
+  ]
 }
