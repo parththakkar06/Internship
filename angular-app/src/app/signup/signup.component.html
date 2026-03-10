@@ -1,1 +1,17 @@
-<h1 style="background-color: red;">signup Component</h1>
+<h3>Form Grouping in Reactive forms </h3>
+
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="enter name" formControlName="name">
+    <br>
+    <br>
+    <input type="text" placeholder="enter password" formControlName="password">
+    <br><br>
+    <input type="text" placeholder="enter email" formControlName="email">
+    <br><br>
+    <button>Submit</button>
+    <button type="button" (click)="setValue()">Set value</button>
+</form>
+
+<h1>{{this.profileForm.value.name}}</h1>
+<h1>{{this.profileForm.value.password}}</h1>
+<h1>{{this.profileForm.value.email}}</h1>
