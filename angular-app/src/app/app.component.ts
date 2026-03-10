@@ -1,14 +1,15 @@
 import { Component, computed, effect, Signal, signal, WritableSignal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { TodolistComponent } from './todolist/todolist.component';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SignupComponent, CommonModule, LoginComponent, FormsModule , TodolistComponent],
+  imports: [ HeaderComponent,RouterOutlet , SignupComponent, CommonModule, LoginComponent, FormsModule , TodolistComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
