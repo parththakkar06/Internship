@@ -5,6 +5,7 @@ import { TodolistComponent } from './todolist/todolist.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserComponent } from './user/user.component';
 
 export const routes: Routes = [
     {
@@ -27,6 +28,10 @@ export const routes: Routes = [
         path : "profile",
         component : ProfileComponent,
         data : {name : 'spiduuu'}
+    },
+    {
+        path : "user/:id/:name",
+        component : UserComponent
     },
     {
         path : '**',

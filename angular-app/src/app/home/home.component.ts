@@ -16,4 +16,33 @@ export class HomeComponent {
   goToProfile(name:string){
     this.router.navigate(['/profile'],{queryParams:{name}})
   }
+
+  users = [
+    {
+      id : 1,
+      name : 'alice',
+      email : 'alice@test.com'
+    },
+    {
+      id : 2,
+      name : 'stephany',
+      email : 'stephany@test.com'
+    },
+    {
+      id : 3,
+      name : 'emma',
+      email : 'emma@test.com'
+    },
+    {
+      id : 4,
+      name : 'john',
+      email : 'john@test.com'
+    },
+    {
+      id : 5,
+      name : 'harold',
+      email : 'harold@test.com'
+    }
+  ]
+
 }
