@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './user/user.component';
 import { TdformComponent } from './tdform/tdform.component';
+import { PassdataComponent } from './passdata/passdata.component';
+import { ReuseComponent } from './reuse/reuse.component';
 
 export const routes: Routes = [
     {
@@ -37,6 +39,14 @@ export const routes: Routes = [
     {
         path : "user/:id/:name",
         component : UserComponent
+    },
+    {
+        path : "datapass",
+        component : PassdataComponent
+    },
+    {
+        path : "example",
+        component : ReuseComponent
     },
     {
         path : '**',

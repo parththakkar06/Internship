@@ -1,0 +1,11 @@
+h3{
+    width: 170px;
+    border: 1px solid red;
+    /* justify-content: space-between; */
+    display: flex;
+}
+
+h3 span {
+    background-color: red;
+
+}

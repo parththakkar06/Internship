@@ -8,7 +8,7 @@ nav{
 ul{
     display: flex;
     list-style-type: none;
-    width: 350px;
+    width: 450px;
     justify-content: space-between;
 }
 
