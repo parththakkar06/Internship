@@ -6,11 +6,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './user/user.component';
+import { TdformComponent } from './tdform/tdform.component';
 
 export const routes: Routes = [
     {
         path : 'login',
         component : LoginComponent
+    },
+    {
+        path : 'tdform',
+        component : TdformComponent
     },
     {
         path : 'signup',
