@@ -6,15 +6,22 @@ import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { TodolistComponent } from './todolist/todolist.component';
 import { HeaderComponent } from './header/header.component';
+import { UserComponent } from './user/user.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ HeaderComponent,RouterOutlet , SignupComponent, CommonModule, LoginComponent, FormsModule , TodolistComponent],
+  imports: [ UserComponent,HeaderComponent,RouterOutlet , SignupComponent, CommonModule, LoginComponent, FormsModule , TodolistComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   
+  userName = "dynamic"
+
+
+  onChange(val:string){
+    this.userName = val
+  }
   title = 'angular-app';
   // count = 0;
   // increase() {

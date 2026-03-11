@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -19,4 +19,7 @@ export class UserComponent {
       this.name = params['name']    
     })
   }
+
+  @Input() user:string = ''
+  @Input() genre:string = ''
 }

@@ -288,6 +288,13 @@
 </div> -->
 
 <app-header></app-header>
- 
+ <!-- <app-user user="someone"></app-user> -->
+ <app-user [user]="userName" genre="Afro"></app-user>
 
+ <select (change)="onChange(selected.value)" #selected>
+  <option value="Mexico">Mexico</option>
+  <option value="Germany">Germany</option>
+  <option value="Tokyo">Tokyo</option>
+  <option value="Italy">Italy</option>
+ </select>
 <router-outlet />
