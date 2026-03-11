@@ -1,5 +1,12 @@
-@for(user of users; track user){
+<!-- @for(user of users; track user){
     <div>
         <app-reuse [user]="user"></app-reuse>
     </div>
+} -->
+
+<h1>Pass Data from Child to Component</h1>
+<app-reuse (getUsers)="handleUsers($event)"></app-reuse>
+
+@for(user of users; track user){
+    <h1>{{user}}</h1>
 }

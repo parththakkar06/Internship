@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-reuse',
@@ -7,5 +7,13 @@ import { Component, Input } from '@angular/core';
   styleUrl: './reuse.component.css'
 })
 export class ReuseComponent {
-  @Input() user:string = ''
+  // @Input() user:string = ''
+
+  users = ['alice', 'mia' , 'emma' , 'kally' , 'sofi']
+
+  @Output() getUsers= new EventEmitter()
+
+  loadData(){
+    this.getUsers.emit(this.users)
+  }
 }
