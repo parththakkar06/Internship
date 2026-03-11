@@ -26,3 +26,15 @@
 <h3>{{amount | currencyConvertor}}</h3>
 
 <h3>{{amount | currencyConvertor : 12}}</h3>
+
+<hr>
+<h1>Service</h1>
+
+<button (click) = "getProductData()">Load Product Data</button>
+
+@for(item of productData ; track item){
+    <br>{{item.productName}},
+    {{item.price}},
+    {{item.brand}}
+    <br><br>
+}

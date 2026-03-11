@@ -24,21 +24,21 @@ export class AppComponent {
   }
   title = 'angular-app';
   
-  counter = 0
-  constructor(){
-    afterRender(()=>{
-      console.log("After Render",this.UserComponent.counter);
+  // counter = 0
+  // constructor(){
+  //   afterRender(()=>{
+  //     console.log("After Render",this.UserComponent.counter);
       
-    })
+  //   })
 
-    afterNextRender(()=>{
-      console.log("AfterNextRender Called")
-    })
-  }
+  //   afterNextRender(()=>{
+  //     console.log("AfterNextRender Called")
+  //   })
+  // }
 
-  updateCounter(){
-    this.counter++
-  }
+  // updateCounter(){
+  //   this.counter++
+  // }
   // count = 0;
   // increase() {
   //   this.count++;

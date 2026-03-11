@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyConvertorPipe } from '../pipe/currency-convertor.pipe';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,7 @@ import { CurrencyConvertorPipe } from '../pipe/currency-convertor.pipe';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-  constructor(private route : ActivatedRoute){
+  constructor(private route : ActivatedRoute, private productService : ProductService){
 
   }
 
@@ -30,4 +31,15 @@ export class ProfileComponent {
   title = 'About Lose'
   date = new Date()
   amount = 10
+  
+  productData : {
+    productName : string , 
+    price : string , 
+    brand : string
+  }[] | undefined
+
+  getProductData(){
+    this.productData = this.productService.getProductData()
+    console.log(this.productData)
+  }
 }
