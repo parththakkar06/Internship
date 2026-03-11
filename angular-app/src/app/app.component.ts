@@ -1,4 +1,4 @@
-import { Component, computed, effect, Signal, signal, WritableSignal } from '@angular/core';
+import { afterNextRender, afterRender, Component, computed, effect, Signal, signal, ViewChild, viewChild, WritableSignal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
@@ -15,7 +15,7 @@ import { UserComponent } from './user/user.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
+  @ViewChild('user') UserComponent:any
   userName = "dynamic"
 
 
@@ -23,6 +23,22 @@ export class AppComponent {
     this.userName = val
   }
   title = 'angular-app';
+  
+  counter = 0
+  constructor(){
+    afterRender(()=>{
+      console.log("After Render",this.UserComponent.counter);
+      
+    })
+
+    afterNextRender(()=>{
+      console.log("AfterNextRender Called")
+    })
+  }
+
+  updateCounter(){
+    this.counter++
+  }
   // count = 0;
   // increase() {
   //   this.count++;
