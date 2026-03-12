@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MoviesService } from '../services/movies.service';
+import { Movies } from '../interfaces/Movies';
 
 @Component({
   selector: 'app-movies',
@@ -13,10 +14,10 @@ export class MoviesComponent {
 
   }
 
-  moviesList:any
+  moviesList:Movies[] = []
 
   ngOnInit(){
-    this.moviesService.getMovies().subscribe((data:any)=>{
+    this.moviesService.getMovies().subscribe((data:Movies[])=>{
       this.moviesList = data
       console.log(this.moviesList);
       
