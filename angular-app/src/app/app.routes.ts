@@ -9,11 +9,16 @@ import { UserComponent } from './user/user.component';
 import { TdformComponent } from './tdform/tdform.component';
 import { PassdataComponent } from './passdata/passdata.component';
 import { ReuseComponent } from './reuse/reuse.component';
+import { RestapicallComponent } from './restapicall/restapicall.component';
 
 export const routes: Routes = [
     {
         path : 'login',
         component : LoginComponent
+    },
+    {
+        path : 'callapi',
+        component : RestapicallComponent
     },
     {
         path : 'tdform',
