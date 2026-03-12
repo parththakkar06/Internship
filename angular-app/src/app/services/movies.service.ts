@@ -14,4 +14,9 @@ export class MoviesService {
     const url = "http://localhost:3000/movies"
     return this.http.get<Movies[]>(url)
   }
+
+  saveMovie(data:Movies):Observable<Movies>{
+    const url = "http://localhost:3000/movies"
+    return this.http.post<Movies>(url,data)
+  }
 }
