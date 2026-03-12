@@ -1,0 +1,11 @@
+<h1>Movies from api</h1>
+
+@for(movie of moviesList; track movie.id){
+    <ul>
+        <li><b>Movie Name : </b>{{movie.title}}</li>
+        <li><b>Genre : </b>{{movie.genre}}</li>
+        <li><b>Release year : </b>{{movie.year}}</li>
+        <li><b>Rating : </b>{{movie.rating}}/10</li>
+        <li><b>Duration : </b>{{movie.duration}}</li>
+    </ul>
+}
