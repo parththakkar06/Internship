@@ -11,6 +11,7 @@ import { PassdataComponent } from './passdata/passdata.component';
 import { ReuseComponent } from './reuse/reuse.component';
 import { RestapicallComponent } from './restapicall/restapicall.component';
 import { MoviesComponent } from './movies/movies.component';
+import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
     {
@@ -57,6 +58,10 @@ export const routes: Routes = [
     {
         path : "example",
         component : ReuseComponent
+    },
+    {
+        path : "admin",
+        loadComponent : ()=>import('./admin/admin.component').then((c)=>c.AdminComponent)
     },
     {
         path : '**',
