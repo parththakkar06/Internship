@@ -8,15 +8,19 @@ import { Movies } from '../interfaces/Movies';
 })
 export class MoviesService {
 
+  url = "http://localhost:3000/movies"
+
   constructor(private http:HttpClient) { }
 
   getMovies():Observable<Movies[]>{
-    const url = "http://localhost:3000/movies"
-    return this.http.get<Movies[]>(url)
+    return this.http.get<Movies[]>(this.url)
   }
 
   saveMovie(data:Movies):Observable<Movies>{
-    const url = "http://localhost:3000/movies"
-    return this.http.post<Movies>(url,data)
+    return this.http.post<Movies>(this.url,data)
+  }
+
+  deleteMovie(id:string):Observable<Movies>{
+    return this.http.delete<Movies>(this.url+'/'+id)
   }
 }

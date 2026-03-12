@@ -37,4 +37,13 @@ export class MoviesComponent {
       }
     })
   }
+
+  deleteMovie(id:string){
+    return this.moviesService.deleteMovie(id).subscribe((data:Movies)=>{
+      console.log(data);
+      if(data){
+        this.getMovie()
+      }
+    }) 
+  }
 }
