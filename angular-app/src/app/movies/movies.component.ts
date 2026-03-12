@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class MoviesComponent {
 
+  selectedMovie : Movies | undefined
   constructor(private moviesService: MoviesService) {
 
   }
@@ -31,11 +32,21 @@ export class MoviesComponent {
   }
 
   addMovie(data: Movies) {
-    this.moviesService.saveMovie(data).subscribe(() => {
-      if(data){
-        this.getMovie()
-      }
-    })
+    if(!this.selectedMovie){
+      this.moviesService.saveMovie(data).subscribe(() => {
+        if(data){
+          this.getMovie()
+        }
+      })
+    }else{
+      const movieData = {...data,id:this.selectedMovie.id}
+      this.moviesService.updateMovie(movieData).subscribe(()=>{
+        if(data){
+          this.getMovie()
+          this.selectedMovie = undefined
+        }
+      })
+    }
   }
 
   deleteMovie(id:string){
@@ -45,5 +56,12 @@ export class MoviesComponent {
         this.getMovie()
       }
     }) 
+  }
+
+  selectMovie(id:string){
+    return this.moviesService.selectedMovie(id).subscribe((data:Movies)=>{
+      console.log(data);
+      this.selectedMovie = data
+    })
   }
 }

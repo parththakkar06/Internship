@@ -23,4 +23,12 @@ export class MoviesService {
   deleteMovie(id:string):Observable<Movies>{
     return this.http.delete<Movies>(this.url+'/'+id)
   }
+
+  selectedMovie(id:string):Observable<Movies>{
+    return this.http.get<Movies>(this.url+'/'+id)
+  }
+
+  updateMovie(data:Movies):Observable<Movies>{
+    return this.http.put<Movies>(this.url+"/"+data.id,data)
+  }
 }
