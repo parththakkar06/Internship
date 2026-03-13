@@ -12,6 +12,8 @@ import { ReuseComponent } from './reuse/reuse.component';
 import { RestapicallComponent } from './restapicall/restapicall.component';
 import { MoviesComponent } from './movies/movies.component';
 import { AdminComponent } from './admin/admin.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -62,6 +64,11 @@ export const routes: Routes = [
     {
         path : "admin",
         loadComponent : ()=>import('./admin/admin.component').then((c)=>c.AdminComponent)
+    },
+    {
+        path : "dashboard",
+        component : DashboardComponent,
+        canActivate : [authGuard]
     },
     {
         path : '**',
