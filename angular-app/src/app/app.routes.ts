@@ -14,11 +14,18 @@ import { MoviesComponent } from './movies/movies.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { authGuard } from './guards/auth.guard';
+import { guestGuard } from './guards/guest.guard';
+import { dashboardChildGuard } from './guards/dashboard-child.guard';
+import { OrdersComponent } from './orders/orders.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { unsavedGuard } from './guards/unsaved.guard';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
     {
         path : 'login',
-        component : LoginComponent
+        component : LoginComponent,
+        canActivate : [guestGuard]
     },
     {
         path : 'callapi',
@@ -41,14 +48,14 @@ export const routes: Routes = [
         component : TodolistComponent
     },
     {
-        path : 'home',
+        path : '',
         component : HomeComponent
     },
-    {
-        path : "profile",
-        component : ProfileComponent,
-        data : {name : 'spiduuu'}
-    },
+    // {
+    //     path : "profile",
+    //     component : ProfileComponent,
+    //     data : {name : 'spiduuu'}
+    // },
     {
         path : "user/:id/:name",
         component : UserComponent
@@ -63,12 +70,31 @@ export const routes: Routes = [
     },
     {
         path : "admin",
-        loadComponent : ()=>import('./admin/admin.component').then((c)=>c.AdminComponent)
+        loadComponent : ()=>import('./admin/admin.component').then((c)=>c.AdminComponent),
+        canMatch : [adminGuard]
     },
     {
         path : "dashboard",
         component : DashboardComponent,
-        canActivate : [authGuard]
+        canActivate : [authGuard],
+        canActivateChild : [dashboardChildGuard],
+        children : [
+            {
+                path : "profile",
+                component : ProfileComponent,
+                data : {name : 'spiduuu'}
+            },
+            {
+                path : "orders",
+                component : OrdersComponent
+            },
+            
+        ]
+    },
+    {
+        path : "edit-profile",
+        component : EditProfileComponent,
+        canDeactivate : [unsavedGuard]
     },
     {
         path : '**',
