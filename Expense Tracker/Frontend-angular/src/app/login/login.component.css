@@ -1,3 +1,11 @@
 *{
     margin-top: 20px;
 }
+.error{
+    color: red;
+}
+
+:disabled{
+    cursor: not-allowed;
+    background-color: gray;
+}

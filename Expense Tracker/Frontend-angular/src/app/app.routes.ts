@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { NotFound404Component } from './not-found404/not-found404.component';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
         path : "register",
         loadComponent : ()=>import('./register/register.component').then((c)=>RegisterComponent)
+    },
+    {
+        path : "**",
+        component : NotFound404Component
     }
 ];

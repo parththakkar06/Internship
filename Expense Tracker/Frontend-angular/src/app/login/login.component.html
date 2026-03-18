@@ -1,13 +1,15 @@
+<div class="mid">
 
-    <div class="mid">
+    <form #loginForm="ngForm" (ngSubmit)="sendDetails(loginForm.value)">
+        <h2>Login</h2>
 
-        <form id="loginForm">
-            <h2>Login</h2>
+        <input type="email" #email="ngModel" placeholder="Email" ngModel name="email" required email/><br>
+        <span class="error" *ngIf="email.invalid && (email.touched || email.dirty)">Please Enter valid email</span>
+        <br>
+        <input type="password" #password="ngModel" placeholder="Password" ngModel name="password" required minlength="5" maxlength="10"/>
+        <span class="error" *ngIf="password.invalid && password.touched">Please Enter valid Password</span>
+        <br>
 
-            <input type="email" id="email" placeholder="Email" /><br>
-            <input type="password" id="password" placeholder="Password" />
-
-            <p class="error" id="error"></p>
-
-            <button class="btn" type="submit">Login</button>
-        </form>
+        <button class="btn" type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+</div>
