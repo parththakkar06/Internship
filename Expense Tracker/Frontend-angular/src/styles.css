@@ -151,6 +151,17 @@ p {
   height: 64px;
 }
 
+.nav-btn{
+  background-color: #111;
+  color: white;
+    text-decoration: none;
+  color: #cfcfcf;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  transition: all 0.2 ease;
+}
+
 .nav-left{
   font-size: 18px;
   font-weight: 600;

@@ -1,14 +1,25 @@
-        <div class="mid">
-            
-        <form id="registerForm">
-            <h2>Register</h2>
+<div class="mid">
 
-            <input type="text" id="name" placeholder="Name" /><br>
-            <input type="email" id="email" placeholder="Email" /><br>
-            <input type="password" id="password" placeholder="Password" /><br>
-            <input type="number" id="age" placeholder="Age" />
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h2>Register</h2>
 
-            <p class="error" id="error"></p>
-
-            <button class="btn" type="submit">Register</button>
-        </form>
+        <input type="text" formControlName="name" placeholder="Name" /><br>
+        <span *ngIf="name?.hasError('required')">Name is Required</span>
+        <span class="error" *ngIf="name?.invalid && (name?.dirty || name?.untouched)">Please Enter User Name</span>
+        <br>
+        <input type="email" formControlName="email" placeholder="Email" /><br>
+        <span *ngIf="email?.hasError('required')">Email is Required</span>
+        <span class="error" *ngIf="email?.invalid && (email?.dirty || email?.untouched)">Please Enter a valid Email</span>
+        <br>
+        <input type="password" formControlName="password" placeholder="Password" /><br>
+        <span *ngIf="password?.hasError('required')">Password is Required</span>
+        <span class="error" *ngIf="password?.invalid && (password?.dirty || password?.untouched)">Please Enter a valid Password</span>
+        <br>
+        <input type="number" formControlName="age" placeholder="Age" />
+        <br>
+        <span *ngIf="age?.hasError('required')">Age is Required</span>
+        <span class="error" *ngIf="age?.invalid && (age?.dirty || age?.untouched)">Please Enter a valid Age</span>
+        <br>
+        <button class="btn" [disabled] = "registerForm.invalid">Register</button>
+    </form>
+</div>

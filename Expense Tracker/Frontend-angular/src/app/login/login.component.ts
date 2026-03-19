@@ -15,6 +15,11 @@ export class LoginComponent {
 
   constructor(private userService : UserService , private authService : AuthService, private route : Router){}
 
+  ngOnInit(){
+    if(this.authService.userSubject.value){
+      this.route.navigate(['/home'])
+    }
+  }
   
   userDetails:any
   sendDetails(val:NgForm){
@@ -25,8 +30,9 @@ export class LoginComponent {
 
   loginUser(userDetails:any){
     this.userService.login(userDetails).subscribe(()=>{
-      this.authService.loadUser()
-      this.route.navigate(['/home'])
+      this.authService.loadUser().subscribe(()=>{
+        this.route.navigate(['/home'])
+      })
     })
   }
 }
