@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const userModel = require("../models/UserModel")
-
+const secret = "source"
 
 const addUsers = async (req, res) => {
     try {
@@ -24,6 +24,12 @@ const addUsers = async (req, res) => {
     }
 }
 
+const verifyUser = async(req,res) => {
+    console.log("req ... ",req.user)
+    const user = await userModel.findById(req.user.id).select('-password -age')
+    console.log("user ... ",user)
+    res.json({user})
+}
 
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
@@ -38,25 +44,25 @@ const loginUser = async (req, res) => {
         return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // const accessToken = jwt.sign(
-    //     { id: user.id, email: user.email },
-    //     secret,
-    //     { expiresIn: "15m" }
-    // );
+    const accessToken = jwt.sign(
+        { id: user._id, email: user.email },
+        secret,
+        { expiresIn: "1d" }
+    );
 
     // const refreshToken = jwt.sign(
     //     { id: user.id, email: user.email },
     //     secret2,
     //     { expiresIn: "7d" }
     // );
-
-    res.json({ message: "Login successful" });
-    // .cookie("accessToken", accessToken, {
-    //     httpOnly: true,
-    //     sameSite: "lax",
-    //     secure: false,
-    //     maxAge: 15 * 60 * 1000
-    // })
+    res.cookie("token", accessToken, {
+        httpOnly: true,
+        sameSite: "Lax",
+        secure: false,
+        // maxAge: 15 * 60 * 1000
+    })
+    res.json({ message: "Login successful" })
+    
     // .cookie("refreshToken", refreshToken, {
     //     httpOnly: true,
     //     sameSite: "lax",
@@ -90,7 +96,17 @@ const loginUser = async (req, res) => {
 //     }
 // }
 
+const logoutUser = (req,res) => {
+    console.log('hi')
+    res.clearCookie('token')
+    res.json({
+        message : "Logged Out"
+    })
+}
+
 module.exports = {
     loginUser,
-    addUsers
+    addUsers,
+    verifyUser,
+    logoutUser
 }

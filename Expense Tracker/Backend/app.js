@@ -5,7 +5,7 @@ const cors = require("cors")
 const uri = 'mongodb://127.0.0.1:27017/expense_tracker';
 
 const corsOptions = {
-    origin: "http://127.0.0.1:5500",
+    origin: "http://localhost:4200",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ['Content-type', 'Authorization'],
     credentials: true
