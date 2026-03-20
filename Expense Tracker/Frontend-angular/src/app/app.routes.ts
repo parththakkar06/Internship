@@ -29,7 +29,12 @@ export const routes: Routes = [
         canActivate : [guestGuard]
     },
     {
+        path : "home/:id",
+        loadComponent : ()=>import('./home/home.component').then((c)=>c.HomeComponent),
+        canActivate : [authGuard]
+    },
+    {
         path : "**",
-        component : NotFound404Component
+        component : LoginComponent
     }
 ];

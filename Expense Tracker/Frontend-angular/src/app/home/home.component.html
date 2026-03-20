@@ -1,14 +1,14 @@
 <div class="mid">
     <!-- <h2>Expense Tracker</h2> -->
-    <form action="" #transactionForm="ngForm" (ngSubmit)="addTransaction(transactionForm.value)">
+    <form action="" [formGroup]="form" (ngSubmit)="onSubmit()">
 
 
         <label>Title*</label>
-        <input type="text" name="title" [ngModel]="selectedTransaction?.title" /><br />
+        <input type="text" formControlName="title" /><br />
         <label>Amount*</label>
-        <input type="number" name="amount" [ngModel]="selectedTransaction?.amount" /><br />
+        <input type="number" formControlName="amount" /><br />
         <label for="currency">Currency* : </label>
-        <select name="currency" [ngModel]="selectedTransaction?.currency">
+        <select formControlName="currency" >
             <option selected value="none">----Select ONE-----</option>
             <option value="INR">INR</option>
             <option value="Dollar">Dollar</option>
@@ -19,14 +19,14 @@
         <br />
         <br />
         <label>Type*</label>
-        <select name="type" [ngModel]="selectedTransaction?.type">
+        <select formControlName="type" >
             <option selected value="none">----Select ONE-----</option>
             <option value="income">Income</option>
             <option value="expense">Expense</option>
         </select>
         <br />
         <label for="category">Category* : </label>
-        <select name="category" [ngModel]="selectedTransaction?.category">
+        <select formControlName="category" >
             <option selected value="none">----Select ONE-----</option>
             <option value="food">Food</option>
             <option value="petrol">Petrol</option>
@@ -36,13 +36,9 @@
         </select>
         <br />
         <label for="description">Description : </label>
-        <textarea name="description" [ngModel]="selectedTransaction?.description"></textarea>
+        <textarea formControlName="description" ></textarea>
         <br /><br />
-        @if(!selectedTransaction){
-            <button class="btn">Add</button>
-        }@else{
-            <button class="btn">Update</button>
-        }
+        <button class="btn" type="submit">{{isEditMode ? 'Update' : 'Add'}}</button>
     </form>
     <h3>Summary</h3>
     <p class="totalIncome">Total Income : {{totalIncome}}</p>

@@ -27,7 +27,8 @@ export class NavigationBarComponent {
     this.http.post('http://localhost:3000/user/logout',{},{withCredentials :true})
     .subscribe(()=>{
       this.authService.setUser(null)
-      this.route.navigate(['/login'])
+      this.route.navigate(['/login',{replaceUrl : true}])
+      this.authService.setUser(null)
     })
   }
 }

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Transaction } from '../interfaces/transaction';
 import { TransactionService } from '../services/transaction.service';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule,],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -16,12 +17,18 @@ export class HomeComponent {
   totalIncome : number = 0
   totalExpense : number = 0
   balance : number = 0
-  constructor(private TransactionService: TransactionService) { }
+  isEditMode = false
+  currentId = ''
+  form!:FormGroup
+  constructor(private transactionService: TransactionService, private router : ActivatedRoute,private fb : FormBuilder, private r : Router) { }
 
   addTransaction(data: Transaction) {
     if (!this.selectedTransaction) {
-      this.TransactionService.saveTransactions(data).subscribe(() => {
-        console.log("Data .... ", data)
+      this.transactionService.saveTransactions(data).subscribe({
+        next: () => {
+          this.form.reset()
+          this.getData()
+        }
       })
     } else {
 
@@ -31,13 +38,14 @@ export class HomeComponent {
   }
 
   getData() {
-    this.TransactionService.getTransactions().subscribe((data: any) => {
+    this.transactionService.getTransactions().subscribe((data: any) => {
       this.TransactionList = data.data
       
     })
   }
 
   getSummary(){
+    this.getData()
     const income = this.TransactionList
         .filter((t) => t.type === "income")
         .reduce((sum, t) => sum + Number(t.amount), 0);
@@ -92,8 +100,56 @@ export class HomeComponent {
 
   }
   ngOnInit(){
-    this.getData()  
+    this.getData()
+
+    this.getSummary()
+    this.form = this.fb.group({
+      title : [''],
+      amount : [''],
+      currency : [''],
+      type : [''],
+      category : [''],
+      description : ['']
+    })
+
+    this.router.paramMap.subscribe(params => {
+      const id = params.get('id')
+      console.log("ID ... ",id)
+      if(id){
+        this.isEditMode = true,
+        this.currentId = id
+
+        this.loadTransaction(id)
+      }
+    })
   }
 
+  loadTransaction(id:string){
+    this.transactionService.selectedTransaction(id).subscribe({
+      next: (res : any) => {
+        console.log("data..",res)
+        this.form.patchValue(res.data)
+      },
+      error : (err) => alert(err)
+    })
+  }
+
+  onSubmit(){
+    if(this.form.invalid) return
+
+    if(this.isEditMode){
+      this.transactionService.updateTransaction(this.currentId,this.form.value).subscribe({
+        next : () => {
+          this.r.navigate(['/transactions'])
+        },
+        error : (err) => {
+          alert(err)
+        }
+      })
+    }else{
+      this.addTransaction(this.form.value)
+      this.getData()
+    }
+  }
   
 }

@@ -24,6 +24,11 @@ const TSchema = new Schema({
     currency : {
         required : true,
         type : String
+    },
+    userId: {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'users',
+        required : true
     }
 },
 {

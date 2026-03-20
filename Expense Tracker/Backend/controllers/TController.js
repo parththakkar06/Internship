@@ -5,7 +5,7 @@ const secret = "parth"
 const tModel = require("../models/TModel")
 
 const getAllTransactions = async (req, res) => {
-    const transactions = await tModel.find()
+    const transactions = await tModel.find({userId: req.user.id})
     res.json({
         data: transactions
     })
@@ -13,7 +13,7 @@ const getAllTransactions = async (req, res) => {
 
 
 const addTransactions = async (req, res) => {
-    const newTransaction = await tModel.create(req.body)
+    const newTransaction = await tModel.create({...req.body,userId : req.user.id})
     res.json({
         message: "Transaction Added.",
         data: newTransaction
@@ -31,7 +31,8 @@ const getTransactionById = async (req, res) => {
         })
     } else {
         res.json({
-            message: "Transaction Not Found!"
+            message: "Transaction Not Found!",
+            transaction : foundTransaction
         })
     }
 }
