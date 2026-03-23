@@ -271,7 +271,7 @@
 </div>
 
 <button (click) = "update()">change</button> -->
-
+<!-- 
 <button (click) = "changeColor('red')">Red</button>
 <button (click) = "changeColor('green')">Green</button>
 <button (click) = "changeColor('orange')">Orange</button>
@@ -285,4 +285,19 @@
 <h1 *ngSwitchCase="'pink'" style="background-color: pink;">Pink Colour</h1>
 <h1 *ngSwitchCase="'blue'" style="background-color: blue;">Blue Colour</h1>
 <h1 *ngSwitchDefault>NO Color Match</h1>
-</div>
+</div> -->
+
+<app-header></app-header>
+<!-- <button (click)="updateCounter()" >count : {{counter}}</button>
+<app-user [counter]="counter" #user></app-user> -->
+
+ <!-- <app-user user="someone"></app-user> -->
+ <!-- <app-user [user]="userName" genre="Afro"></app-user>
+
+ <select (change)="onChange(selected.value)" #selected>
+  <option value="Mexico">Mexico</option>
+  <option value="Germany">Germany</option>
+  <option value="Tokyo">Tokyo</option>
+  <option value="Italy">Italy</option>
+ </select> -->
+<router-outlet />

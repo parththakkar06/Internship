@@ -1,20 +1,44 @@
-import { Component, computed, effect, Signal, signal, WritableSignal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { afterNextRender, afterRender, Component, computed, effect, Signal, signal, ViewChild, viewChild, WritableSignal } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { TodolistComponent } from './todolist/todolist.component';
+import { HeaderComponent } from './header/header.component';
+import { UserComponent } from './user/user.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SignupComponent, CommonModule, LoginComponent, FormsModule , TodolistComponent],
+  imports: [ UserComponent,HeaderComponent,RouterOutlet , SignupComponent, CommonModule, LoginComponent, FormsModule , TodolistComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
+  @ViewChild('user') UserComponent:any
+  userName = "dynamic"
+
+
+  onChange(val:string){
+    this.userName = val
+  }
   title = 'angular-app';
+  
+  // counter = 0
+  // constructor(){
+  //   afterRender(()=>{
+  //     console.log("After Render",this.UserComponent.counter);
+      
+  //   })
+
+  //   afterNextRender(()=>{
+  //     console.log("AfterNextRender Called")
+  //   })
+  // }
+
+  // updateCounter(){
+  //   this.counter++
+  // }
   // count = 0;
   // increase() {
   //   this.count++;

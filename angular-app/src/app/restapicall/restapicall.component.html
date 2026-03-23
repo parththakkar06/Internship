@@ -1,0 +1,11 @@
+<h1>API Call Service</h1>
+
+@for(item of productList ; track item.id){
+    <ul>
+        <li><b>Product Name : </b>{{item.title}}</li>
+        <li><b>Price : </b>{{item.price |currency}}</li>
+        <li><b>Rating : </b>{{item.rating}}</li>
+        <li><b>Category : </b>{{item.title}}</li>
+        <li><img src="{{item.thumbnail}}" alt=""></li>
+    </ul>
+}

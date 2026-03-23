@@ -1,1 +1,12 @@
-<p style="background-color: skyblue; font-family: 'Times New Roman', Times, serif;">login Component</p>
+<form action="" method="post">
+    <input type="text" placeholder="enter name" [formControl] = "name">
+    <br>
+    <br>
+    <input type="text" placeholder="enter password" [formControl] = "password">
+    <br>
+    <br>
+    <button type="button" (click) = "loginAdmin()">login</button>
+    <button type="button" (click) = "setValues()">set values</button>
+    <h3>{{name.value}}</h3>
+    <h3>{{password.value}}</h3>
+</form>

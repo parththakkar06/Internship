@@ -1,0 +1,60 @@
+<div class="mid">
+
+    <h2 class="page-title">All Transactions</h2>
+    <div class="filter-bar">
+        <label for="categoryfilter">Filter by category : </label>
+        <select #categoryfilter  (change)="applyCategoryFilter(categoryfilter.value)" >
+            <option value="all">All</option>
+            <option value="food">Food</option>
+            <option value="petrol">Petrol</option>
+            <option value="shopping">Shopping</option>
+            <option value="bills">Bills</option>
+            <option value="others">Others</option>
+        </select>
+    </div>
+    <div class="filter-bar">
+        <label for="typeFilter">Filter by Type : </label>
+        <select #typeFilter (change)="applyTypeFilter(typeFilter.value)">
+            <option value="all">All</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+    </div>
+    
+    @if(TransactionList.length !== 0){
+
+    <div id="table">
+        <table class="transaction-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                @for(t of TransactionList ; track t._id){
+                    <tr>
+                        <td>{{t._id}}</td>
+                        <td>{{t.category}}</td>
+                        <td>{{t.createdAt | date:'short'}}</td>
+                        <td>{{t.type}}</td>
+                        <td>{{t.amount}}</td>
+                        <td>{{t.description}}</td>
+                        <td><button class="btn" (click)="deleteTransaction(t._id)">Delete</button><button class="btn">Update</button></td>
+                    </tr>
+                }
+            </thead>
+            <tbody id="transactionsBody">
+
+            </tbody>
+        </table>
+        </div>
+    }@else{
+        <div style="text-align: center;">
+            <h2>No Items to display</h2>
+        </div>
+    }
+</div>

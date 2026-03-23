@@ -1,0 +1,32 @@
+<h1>Movies from api</h1>
+
+<form action="" #userForm = "ngForm" (ngSubmit)="addMovie(userForm.value)">
+    <input type="text" placeholder="enter movie name" name="title" [ngModel] = "selectedMovie?.title">
+    <br><br>
+    <input type="text" placeholder="enter genre" name="genre" [ngModel] = "selectedMovie?.genre">
+    <br><br>
+    <input type="number" placeholder="enter release year" name="year" [ngModel] = "selectedMovie?.year">
+    <br><br>
+    <input type="number" placeholder="enter rating" name="rating" [ngModel] = "selectedMovie?.rating">
+    <br><br>
+    <input type="number" placeholder="enter duration" name="duration" [ngModel] = "selectedMovie?.duration">
+    <br><br>
+    @if(!selectedMovie){
+        <button>Add Movie</button>
+    }@else{
+        <button>Update Movie</button>
+    }
+</form>
+
+@for(movie of moviesList; track movie.id){
+    <ul>
+        <li><b>Movie Name : </b>{{movie.title}}</li>
+        <li><b>Genre : </b>{{movie.genre}}</li>
+        <li><b>Release year : </b>{{movie.year}}</li>
+        <li><b>Rating : </b>{{movie.rating}}/10</li>
+        <li><b>Duration : </b>{{movie.duration}}</li>
+        <button (click) = "deleteMovie(movie.id)">Delete</button>
+        <button (click) = "selectMovie(movie.id)">Update</button>
+    </ul>
+}
+
