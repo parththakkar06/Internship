@@ -1,7 +1,7 @@
 document.getElementById("registerForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const id = document.getElementById("id").value.trim();
+    // const id = document.getElementById("id").value.trim();
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
@@ -10,7 +10,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
 
     error.textContent = "";
 
-    if (!id || !name || !email || !password || !age) {
+    if ( !name || !email || !password || !age) {
         error.textContent = "All fields are required";
         return;
     }
@@ -33,7 +33,6 @@ document.getElementById("registerForm").addEventListener("submit", async functio
             },
             credentials : 'include',
             body: JSON.stringify({
-                id,
                 name,
                 email,
                 password,
@@ -50,7 +49,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         console.log(data)
         // alert(data);
         // e.target.reset();
-
+        window.location.href = "login.html"
     }catch(err){
         error.textContent = "Server Not reachable"
     }

@@ -1,45 +1,39 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-
-var LocalStorage = require('node-localstorage').LocalStorage;
-localStorage = new LocalStorage('./scratch');
+const userModel = require("../models/UserModel")
 
 
-const getData = () => {
+const addUsers = async (req, res) => {
     try {
-        return JSON.parse(localStorage.getItem("data")) || [];
+        console.log("here")
+        const hashedPassword = bcrypt.hashSync(req.body.password, 10)
+        req.body.password = hashedPassword
+        const newUser = req.body
+        const savedUser = await userModel.create(newUser)
+        // const token = jwt.sign(newUser, secret)
 
-    }catch(err) {
-        console.error("Getlocal",err)
+        res.json({
+            data: savedUser,
+            // token: token
+        })
+    } catch (err) {
+        res.json({
+            message: "Problem occured while adding user",
+            error: err.message
+        })
     }
-}
-
-
-const addUsers = (req, res) => {
-    const data = getData()
-    const hashedPassword = bcrypt.hashSync(req.body.password, 10)
-    req.body.password = hashedPassword
-    const newUser = req.body
-    // const token = jwt.sign(newUser, secret)
-    data.push(newUser)
-    localStorage.setItem("data", JSON.stringify(data))
-    res.json({
-        data: newUser,
-        token: token
-    })
 }
 
 
 const loginUser = async (req, res) => {
-    const data = getData();
     const { email, password } = req.body;
 
-    const user = data.find(u => u.email === email);
+    const user = await userModel.findOne({email});
     if (!user) {
         return res.status(404).json({ message: "User not found" });
     }
 
-    const valid = await bcrypt.compare(password, user.password);
+    const valid = bcrypt.compareSync(password, user.password);
     if (!valid) {
         return res.status(401).json({ message: "Invalid credentials" });
     }

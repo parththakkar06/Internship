@@ -9,6 +9,18 @@ app.use(cookieParser())
 const userRoutes = require("./routes/UserRoutes")
 app.use("/user",userRoutes)
 
+const securityRoutes = require("./routes/SecurityRoutes")
+const { connectDb } = require("./autoInsert/db")
+const { startScheduler } = require("./autoInsert/Scheduler")
+app.use("/",securityRoutes)
+
+
+const start = async() => {
+    await connectDb()
+    startScheduler();
+}
+
+start()
 //server connection 
 const PORT = 3000
 app.listen(PORT, () => {
