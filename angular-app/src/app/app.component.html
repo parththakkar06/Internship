@@ -1,0 +1,288 @@
+<!-- <h1>Angular Training</h1> -->
+
+<!-- <p>Counter : {{ count }}</p>
+
+<button (click) = "increase()">Increase</button>
+<button (click) = "decrease()">Decrease</button>
+
+<button (click) = "toggle()">Toggle Message</button>
+
+<p *ngIf = "isVisible">
+  this appears and disappears
+</p> -->
+
+<!-- <h2>Name : {{name}}</h2>
+<p>Age : {{age}}</p>
+
+<button (click) = "increaseAge()">Increase Age</button>
+<button (click) = "resetAge()">Reset Age</button> -->
+
+
+<!-- <p> Sum : {{ getSum() }}</p>
+<button (click) = "increaseAge()">Increase Age</button> -->
+
+
+
+<!-- <img [src]="imageUrl">
+
+<button [disabled]="isDisabled">Click Me</button>
+
+<button (click)="isDisabled = !isDisabled">
+  Toggle Disabled
+</button> -->
+
+
+
+<!-- <input (input) = "onInput($event)">
+<p>You typed : {{typedValue}}</p>
+
+<app-login></app-login>
+<app-signup></app-signup> -->
+
+
+
+<!-- <h1>Counter App</h1>
+<div style="text-align: center;">
+  <h3 class="count">{{count}}</h3>
+  <div>
+    <button (click) = "handleCounter('minus')" class="btn bg-red" >Decrement</button>
+    <button class="btn bg-black" (click) = "handleCounter('')">Reset</button>
+    <button class="btn bg-green" (click) = "handleCounter('plus')">Increment</button>
+  </div>
+</div> -->
+
+
+
+
+<!-- {{username}}
+<br>
+<input (input) = "getUserName($event)" type="text" #userNameField>
+<button (click) = "setUserName()">set username</button>
+<button (click) = getUserNameWithTemplate(userNameField.value) >get username</button> -->
+
+<!-- @if(value > 5){
+
+<div style="background-color: salmon; height: 200px; width: 200px;"></div>
+
+} -->
+
+<!-- <button (click) = "hide()"> Hide </button>
+<button (click) = "show()"> Show </button>
+<button (click) = "toggle()">Toggle</button>
+<button (click) = "toggle()"> {{display?'hide':'show'}} </button>
+
+@if(display){
+
+<div style="background-color: aqua; height: 200px; width: 200px;"></div>
+
+}
+
+<hr>
+<hr>
+
+<button (click) = "toggleDiv()">Toggle</button>
+
+@if(displayOneDiv){
+<div style="background-color: blue; width: 100px; height: 100px;"></div>
+}
+@else{
+<div style="background-color: cornflowerblue; width: 100px; height: 100px;"></div>
+} -->
+
+<!-- 
+<h1>Switch Case in Angluar 19</h1>
+
+<button (click) = "handleColor('red')">Red</button>
+<button (click) = "handleColor('green')">Green</button>
+<button (click) = "handleColor('blue')">Blue</button>
+<button (click) = "handleColor('yellow')">Yellow</button>
+
+
+<input type="text" (input) = "changeColor($event)">
+
+@switch(color){
+
+  @case('red'){
+    <h1 style="background-color: red;">Red Color</h1>
+  }
+  @case('blue'){
+    <h1 style="background-color: blue;">Red Color</h1>
+  }
+  @case('green'){
+    <h1 style="background-color: green;">Red Color</h1>
+  }
+  @case('yellow'){
+    <h1 style="background-color: yellow;">Red Color</h1>
+  }
+  @default{
+    <h1 style="background-color: black; color: wheat;">NO MATCH</h1>
+  }
+} -->
+
+
+<!-- <h1>Loops in Angular</h1> -->
+
+<!-- <h1>{{users[0]}}</h1>
+<h1>{{users[1]}}</h1>
+<h1>{{users[2]}}</h1>
+<h1>{{users[3]}}</h1>
+<h1>{{users[4]}}</h1> -->
+<!-- 
+@for(user of users;track user){
+  <h2>{{user}}</h2>
+}
+
+<hr>
+
+@for(student of students;track student.name; let id=$index){
+  <h2>
+    <span>{{id+1}} </span>
+    <span>{{student.name}} </span>
+    <span>{{student.age}} </span>
+    <span>{{student.email}} </span>
+    <button (click) = "getName(student.name)">get name</button>
+  </h2>
+}
+
+<div style="background-color: green; width: 100px; height: 100px;" (mouseenter) = "handleEvent($event)"></div>
+
+<div style="background-color: rosybrown; width: 100px; height: 100px;" (mouseleave) = "handleEvent($event)"></div>
+
+
+<br><br>
+<input type="text" name="user" (blur) = "handleEvent($event)" (focus) = "handleEvent($event)" (input) = "handleEvent($event)">
+
+<br>
+<br>
+{{data}} <br>
+{{count()}}
+<br> -->
+<!-- <button (click) = "updateValue()">Change Value</button> -->
+<!-- 
+<button (click) = "updateValue('inc')">Inc</button>
+<button (click) = "updateValue('dec')">Dec</button> -->
+
+
+<!-- {{data()}}
+<br>
+{{coun()}}
+<br>
+<button (click) = "updateValue()">update</button>
+<br>
+{{z()}}
+<br>
+<button (click) = "updateValues()">update it</button>
+<button (click) = "updateXValue()">update X value</button> -->
+
+<!-- {{count()}}
+
+<button (click) = "toggleValue()">Update</button>
+
+@if(displayHeading){
+  <h1 >Heading</h1>
+} -->
+
+
+<!-- @for(user of users ; track user){ -->
+  <!-- <h3>this is our {{$index+1}} and name is {{user}}</h3> -->
+  <!-- <h4>{{$last}}</h4> -->
+  <!-- @if($first){
+    <h3 style="color: red;">this is our {{$index+1}} and name is {{user}}</h3>
+  }
+  @if($last){
+    <h3 style="color: pink;">this is our {{$index+1}} and name is {{user}}</h3>
+  }
+  @else{
+    <h3>this is our {{$index+1}} and name is {{user}}</h3>
+  } -->
+
+
+  <!-- @if($odd){
+    <h3 style="background-color: sandybrown;">this is our {{$index}} and name is {{user}}</h3> 
+  }@else{
+    <h3 style="background-color: firebrick;">this is our {{$index}} and name is {{user}}</h3>
+  } -->
+  <!-- {{$count}} -->
+
+<!-- } -->
+
+
+  <!-- @empty(){
+    <h1>NO RECORD FOUND</h1>
+  }  -->
+
+
+<!-- <input [(ngModel)]="name" type="text" placeholder="enter your name">
+  {{name}} -->
+
+
+<!-- <input type="text" placeholder="enter name" (input) = "changeName($event)">
+{{name}} -->
+
+
+  <!-- <app-todolist></app-todolist> -->
+
+  <!-- <h1
+  [style.backgroundColor] = "bgColor"
+  [style.fontSize.px] = "fontSize">Dynamic Style</h1>
+
+  <h1
+  [style.fontSize]="zoom?headingSizeBig:headingSizeSmall">Heading</h1>
+  <button (click)="updateHeadingSize()">toggle</button> -->
+
+  <!-- <h1>NgFor directive</h1>
+
+  <ul>
+    <li *ngFor = "let student of students">
+      {{student}}
+    </li>
+  </ul>
+
+
+  <h3>employees</h3>
+
+  <ul>
+    <li *ngFor = "let emp of employees">
+      {{emp.name}}, {{emp.age}} , {{emp.email}}
+    </li>
+  </ul> -->
+
+<!-- <h1>ngif directive</h1>
+
+<div *ngIf = "login else elseBlock">
+  <a href="/">login</a>
+</div>
+
+<ng-template #elseBlock>
+  <a href="/">logout</a>
+</ng-template>
+<br>
+
+
+<br><br>
+<div *ngIf = "block==0">
+  <h1>Heading 0</h1>
+</div>
+<div *ngIf = "block==1">
+  <h1>Heading 1</h1>
+</div>
+<div *ngIf = "block==2">
+  <h1>Heading 2</h1>
+</div>
+
+<button (click) = "update()">change</button> -->
+
+<button (click) = "changeColor('red')">Red</button>
+<button (click) = "changeColor('green')">Green</button>
+<button (click) = "changeColor('orange')">Orange</button>
+<button (click) = "changeColor('pink')">Pink</button>
+<button (click) = "changeColor('blue')">Blue</button>
+
+<div [ngSwitch]="color">
+<h1 *ngSwitchCase="'red'" style="background-color: red;">Red Colour</h1>
+<h1 *ngSwitchCase="'green'" style="background-color: green;">Green Colour</h1>
+<h1 *ngSwitchCase="'orange'" style="background-color: orange;">Orange Colour</h1>
+<h1 *ngSwitchCase="'pink'" style="background-color: pink;">Pink Colour</h1>
+<h1 *ngSwitchCase="'blue'" style="background-color: blue;">Blue Colour</h1>
+<h1 *ngSwitchDefault>NO Color Match</h1>
+</div>

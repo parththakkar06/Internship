@@ -1,0 +1,305 @@
+
+ 
+ 
+ 
+1. Join + Basic Aggregation
+Write an aggregation to:
+Join customers with orders
+Show full name
+Total number of orders
+Total revenue
+Only include Delivered orders
+Must use: $lookup, $unwind, $match, $group
+ 
+
+Ans : 
+db.customers.aggregate([
+    { $lookup: { 
+        from: "orders", localField: "customerId", foreignField: "customerId", as: "orders" 
+        } 
+    }, 
+    { $unwind: "$orders" }, 
+    { $match: { "orders.orderInfo.status": "Delivered" } }, 
+    { $group: { 
+        _id: "$customerId", 
+        total_orders: { $sum: 1 } , 
+        total_revenue : {$sum : "$orders.pricing.totalAmount"} , 
+        fullName : { $first : {$concat : [ "$profile.name.first" , "$profile.name.last" ] } } 
+        } 
+    }
+])
+
+
+
+2. Category Revenue Calculation
+From orders:
+Unwind items
+Group by items.product.category
+Calculate:
+
+total quantity sold
+total revenue (price × quantity)
+Sort descending by revenue
+
+Ans : 
+
+db.orders.aggregate([ 
+    { $unwind : "$items" } , 
+    { $group : {
+        _id : "$items.product.category" , 
+        totalQuantitySold : { $sum : "$items.quantity" } , 
+        totalRevenue : { $sum : { $multiply : [ "$items.price" , "$items.quantity" ] } }  
+        } 
+    } , 
+    {$sort : { totalRevenue : -1} }  
+])
+
+
+
+3. Revenue After Discount
+For each customer:
+Calculate gross revenue (pricing.totalAmount)
+Calculate total discount
+Calculate net revenue
+Add a field:
+
+"High Value" if netRevenue > 2000
+"Regular" otherwise
+
+Ans : 
+db.orders.aggregate( [ 
+    { $group : { 
+        _id : "$customerId"  , 
+        grossRevenue : {$sum : "$pricing.totalAmount" } , 
+        totalDiscount : { $sum : "$pricing.discount" }  
+        } 
+    },
+    { $addFields : {
+        netRevenue : { $subtract : [ "$grossRevenue" , "$totalDiscount" ] } 
+        } 
+    },
+    { $addFields : { 
+        revenueValue : { $cond : [ { $gt : [ "$netRevenue" , 2000] }, "HighValue" , "Regular" ] } 
+        } 
+    } 
+]) 
+
+db.orders.aggregate( [ 
+    { $group : { 
+        _id : "$customerId"  , 
+        grossRevenue : {$sum : "$pricing.totalAmount" } , 
+        totalDiscount : { $sum : "$pricing.discount" } , 
+        netRevenue : { $subtract : [ "$grossRevenue" , "$totalDiscount" ] } 
+        } 
+    }
+     
+]) 
+
+
+4. Payment Method Analysis
+Join orders with payments and return:
+Payment method
+Number of transactions
+Total gateway fees collected
+
+Ans : 
+
+db.orders.aggregate( [  
+    { $lookup : {
+        from : "payments" , 
+        localField : "orderId" , 
+        foreignField : "orderId" , 
+        as : "pay" } 
+    } , 
+    { $unwind : "$pay" } , 
+    { $group : { 
+        _id : "$pay.paymentDetails.method" ,
+        totalTransactions : { $sum : 1} , 
+        totalGatewayFeesCollected : { $sum : "$pay.breakdown.gatewayFee" }  
+        }  
+    }
+])
+
+
+5. Customer Revenue Ranking
+Return:
+fullName
+totalRevenue
+rank (highest revenue = rank 1)
+denseRank
+runningRevenue
+revenueDifference from previous customer
+
+Ans : 
+db.customers.aggregate( [ 
+    { $lookup : { 
+        from : "orders" , 
+        localField : "customerId" , 
+        foreignField : "customerId" , 
+        as : "orders"  
+        } 
+    },
+    {$unwind : "$orders"} ,
+    { $group : { 
+        _id : "$customerId"  , 
+        fullName : { $first : { $concat : [ "$profile.name.first" , " "  , "$profile.name.last" ] } },
+        totalRevenue : { $sum : "$orders.pricing.totalAmount" }  
+        } 
+    } , 
+    { $setWindowFields : { 
+        sortBy : { totalRevenue : -1}, 
+        output : { 
+            Rank : { $rank : {} } , 
+            denseRank : { $denseRank : {} } , 
+            runningRevenue : { 
+                $sum : "$totalRevenue" , 
+                window : { documents : [ "unbounded" , "current" ] 
+                } 
+            }, 
+            revenueDifference : { $shift : { output : "$totalRevenue" , by : -1} }  
+            }   
+        } 
+    }
+]) 
+
+
+
+
+6. Top Category Per Customer
+For each customer:
+Find the category they spent most money on
+Return only top 
+
+
+Ans : 
+db.orders.aggregate( [
+    {$unwind : "$items"},
+    { $group : { 
+        _id : { 
+            customerId : "$customerId" , category : "$items.product.category"
+        }  , 
+        totalSpent : {$sum : "$items.price" }  
+        } 
+    }, 
+    { $sort : { customerId : 1 , totalSpent : -1} }, 
+    {$group : { 
+        _id : "$_id.customerId" , 
+        topCategory : {$first : { category : "$_id.category" } } , 
+        spent : {$first : "$totalSpent" } }
+    } 
+])
+
+
+
+7. Advanced $facet Dashboard Query
+Single query returning:
+Paginated customers (skip 0, limit 5)
+Top 3 customers
+Total revenue
+Total customers
+Revenue bucket distribution
+Payment method distribution
+
+Ans : 
+
+db.customers.aggregate([
+    {$lookup : { 
+        from : "orders" , 
+        localField : "customerId" , 
+        foreignField : "customerId" , 
+        as : "orders" } 
+    } ,
+    {$addFields : {
+        totalRevenue : { $sum : "$orders.pricing.totalAmount"}}
+    } , 
+    {$facet : {
+        paginatedCustomers : [ {$skip : 0}, {$limit : 1} ] ,   
+        top3Customers : [ {$limit : 3}] , 
+        totalRevenue : [ { $group : { _id  : null , totalRevenue : {$sum : "$totalRevenue" }} }], 
+        totalCustomers : [ { $group : { _id : null , totalCustomers : { $sum : 1} }} ] , 
+        revenueBucketDistribution : [ {$bucketAuto : { groupBy : "$totalRevenue" , buckets : 4} }] , 
+        paymentMethodDistribution : [ 
+            { $unwind : "$orders"} , 
+            { $lookup : { from : "payments" , localField : "orders.orderId" , foreignField : "orderId" , as : "pay" } },
+            {$unwind : "$pay"} , 
+            {$group : { _id : "$pay.paymentDetails.method" , count : {$sum : 1} } } 
+            ] 
+        } 
+    }
+])
+
+ 
+8. Top 2 Orders Per Customer
+For each customer:
+Return only thetop 2 highest value orders
+
+Ans : 
+
+db.customers.aggregate( [
+    { $lookup :  { 
+        from : "orders" , 
+        localField : "customerId" , 
+        foreignField : "customerId" , 
+        as : "orders" 
+        }  
+    } , 
+    { $project : { 
+        cutomerName : { $concat : [ "$profile.name.first" , " " ,"$profile.name.last" ] },
+        customerId : "$customerId" ,
+        result : {$slice : [ {$sortArray : { input :  "$orders" , sortBy : { "$pricing.totalAmount" : -1} }  }, 0,2 ]} }  
+    }   
+])
+
+
+
+9. Delivered Revenue Percentage
+For each customer:
+Total revenue
+Delivered revenue
+Cancelled revenue
+Percentage of delivered revenue
+
+
+Ans : 
+db.orders.aggregate( [
+    { $group : { 
+        _id : "$customerId" , 
+        totalRevenue : { $sum : "$pricing.totalAmount"}, 
+        deliveredRevenue : { $sum : {$cond : [ { $eq : ["$orderInfo.status" , "Delivered" ] } ,"$pricing.totalAmount",0] } }, 
+        cancelledRevenue : { $sum : { $cond : [ { $eq : [ "$orderInfo.status" , "Cancelled" ]  } , "$pricing.totalAmount" , 0] } } 
+        }  
+    } , 
+    { $addFields : { 
+        percentageDeliveredRevenue : { $multiply : [ { $divide : [ "$deliveredRevenue" , "$totalRevenue" ] } , 100] } 
+        } 
+    }  
+])
+
+
+10. Membership Tier Analysis
+Return:
+Membership tier
+Total customers
+Average revenue per tier
+
+
+Ans :
+
+db.customers.aggregate( [ 
+    {$lookup : { 
+        from : "orders" , 
+        localField : "customerId" , 
+        foreignField : "customerId" , 
+        as : "orders" } 
+    } ,
+    { $addFields : { 
+        totalRevenue : { $sum : "$orders.pricing.totalAmount" } 
+        } 
+    } ,
+    { $group : { 
+        _id : "$membership.tier" , 
+        totalCustomers : {$sum : 1} , 
+        averageRevenue : { $avg : "$totalRevenue" } 
+        } 
+    }  
+])
